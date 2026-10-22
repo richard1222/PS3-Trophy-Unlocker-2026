@@ -1,7 +1,7 @@
 ifndef PSL1GHT
 $(error Set PSL1GHT to the pinned SDK root)
 endif
-TITLE := PS3 Trophy Discovery
+TITLE := PS3 Trophy Browser
 APPID := TROPH2026
 CONTENTID := UP0001-$(APPID)_00-0000000000000001
 TARGET := trophy-startup

@@ -13,6 +13,37 @@
 #define MAX_SETS 1024
 static int report_fd = -1;
 static int report_failed = 0;
+static struct { char user[9];char set[13]; } catalog[MAX_SETS];
+static unsigned catalog_count=0;
+
+unsigned trophy_set_count(void){return catalog_count;}
+
+int trophy_set_label(unsigned index,char *buffer,size_t size)
+{
+    if(index>=catalog_count)return -1;
+    int length=snprintf(buffer,size,"User %s / %s",catalog[index].user,catalog[index].set);
+    return length<0||(size_t)length>=size?-1:0;
+}
+
+int trophy_set_details(unsigned index,char *buffer,size_t size)
+{
+    if(index>=catalog_count)return -1;
+    char path[256];unsigned char header[48];u64 got=0;int fd;
+    snprintf(path,sizeof(path),"/dev_hdd0/home/%s/trophy/%s/TROPUSR.DAT",catalog[index].user,catalog[index].set);
+    int result=sysLv2FsOpen(path,SYS_O_RDONLY,&fd,0,NULL,0);
+    if(result){snprintf(buffer,size,"TROPUSR open error: 0x%08x",(unsigned)result);return -1;}
+    result=sysLv2FsRead(fd,header,sizeof(header),&got);sysLv2FsClose(fd);
+    if(result||got!=sizeof(header)){
+        snprintf(buffer,size,"TROPUSR read error: 0x%08x / %llu bytes",(unsigned)result,(unsigned long long)got);return -1;
+    }
+    const unsigned char magic[8]={0x81,0x8f,0x54,0xad,0,1,0,0};
+    if(memcmp(header,magic,8)){
+        snprintf(buffer,size,"TROPUSR header is unsupported.");return -1;
+    }
+    unsigned tables=((unsigned)header[8]<<24)|((unsigned)header[9]<<16)|((unsigned)header[10]<<8)|header[11];
+    snprintf(buffer,size,"TROPUSR header recognized\nTable count: %u\n\nHeader inspection only. Trophy states and\nprotection metadata are not yet validated.",tables);
+    return 0;
+}
 
 static int begin_report(void)
 {
@@ -93,6 +124,7 @@ static void inspect_header(const char *root, const char *file)
 
 int trophy_discovery(void)
 {
+    catalog_count=0;report_fd=-1;report_failed=0;
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
     line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.2\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
@@ -118,6 +150,9 @@ int trophy_discovery(void)
             if(!read)break;
             set.d_name[sizeof(set.d_name)-1]=0;
             if(!npwr(set.d_name))continue;
+            memcpy(catalog[catalog_count].user,user.d_name,8);catalog[catalog_count].user[8]=0;
+            memcpy(catalog[catalog_count].set,set.d_name,12);catalog[catalog_count].set[12]=0;
+            catalog_count++;
             sets++;line("user=%s set=%s\n",user.d_name,set.d_name);
             snprintf(path,sizeof(path),"/dev_hdd0/home/%.8s/trophy/%.12s",user.d_name,set.d_name);
             inspect_header(path,"TROPUSR.DAT");inspect_header(path,"TROPTRNS.DAT");
