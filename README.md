@@ -1,13 +1,15 @@
 ![Platform](https://img.shields.io/badge/Platform-PlayStation_3-blue)
 ![Target](https://img.shields.io/badge/Target-Evilnat_4.93_CFW-orange)
 ![Status](https://img.shields.io/badge/Status-Research_%26_Development-yellow)
-![Hardware](https://img.shields.io/badge/Console_Validation-Pending-lightgrey)
+![Hardware](https://img.shields.io/badge/Console_Validation-v0.0.6_Read--Only_Tested-green)
 
 # PS3 Trophy Unlocker 2026
 
+> **Latest beta:** [v0.0.6 Read-Only Beta release notes](releases/v0.0.6/README.md). Browsing was owner-tested on Evilnat 4.93 CFW. **No public PKG is attached yet; trophy unlocking and PSN sync are not supported.**
+
 A homebrew project for viewing and unlocking selected trophies on **Evilnat 4.93 custom firmware**. Development starts with trophy-format inspection, backups and a verified build environment, then moves to the on-console unlock interface.
 
-**Current status:** initial research and setup. **There is no working unlocker or installable release yet.** Compatibility with Evilnat 4.93 is the target, not a completed test result.
+**Current status (October 22, 2026):** v0.0.6 **read-only trophy browsing** has been owner-tested on one Evilnat 4.93 CFW PS3. No trophy-unlocking or PSN-sync capability has been verified. [Public beta release notes](releases/v0.0.6/README.md) are available; the installation PKG is not yet publicly distributed or checksum-verified for release.
 
 Last updated: October 22, 2026.
 
@@ -101,7 +103,7 @@ The exact firmware variant and relevant modules will be recorded with console te
 
 ## Quick start
 
-**Available now:** read-only inspection tools and synthetic tests. There is no working unlocker release yet. See [tool commands and limits](docs/TOOLS.md) and [source research](docs/RESEARCH-2026-10-22.md).
+**Available now:** read-only inspection tools, synthetic tests, and an owner-tested v0.0.6 console trophy browser (not yet publicly packaged). No functional trophy-unlocking release exists. See [tool commands and limits](docs/TOOLS.md) and [source research](docs/RESEARCH-2026-10-22.md).
 
 ```text
 python -m unittest discover -s tests -v
