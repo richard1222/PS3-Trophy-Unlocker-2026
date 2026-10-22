@@ -12,7 +12,7 @@ include $(PSL1GHT)/ppu_rules
 all: $(TARGET).pkg
 
 $(TARGET).elf: source/probe.c
-	$(CC) -std=c99 -O2 -Wall -Wextra -Werror $(MACHDEP) $(LIBPSL1GHT_INC) $< $(LIBPSL1GHT_LIB) -lsysutil -llv2 -o $@
+	$(CC) -std=gnu99 -O2 -Wall -Wextra -Werror $(MACHDEP) $(LIBPSL1GHT_INC) $< $(LIBPSL1GHT_LIB) -lsysutil -llv2 -o $@
 
 $(TARGET).self: $(TARGET).elf
 $(TARGET).pkg: $(TARGET).self
