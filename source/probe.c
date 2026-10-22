@@ -91,7 +91,7 @@ static void inspect_header(const char *root, const char *file)
     line("\n");
 }
 
-int main(void)
+int trophy_discovery(void)
 {
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
