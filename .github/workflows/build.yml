@@ -1,0 +1,40 @@
+name: Verify tools and build read-only PS3 probe
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: trophy-probe-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Test research tools
+        run: python3 -m unittest discover -s tests -v
+      - name: Acquire and verify pinned open-source SDK
+        run: python3 tools/fetch_sdk.py --output sdk.tar.gz
+      - name: Extract SDK
+        run: |
+          mkdir sdk
+          tar -xzf sdk.tar.gz -C sdk --strip-components=1
+          echo "PS3DEV=$PWD/sdk" >> "$GITHUB_ENV"
+          echo "PSL1GHT=$PWD/sdk" >> "$GITHUB_ENV"
+          echo "$PWD/sdk/bin" >> "$GITHUB_PATH"
+          echo "$PWD/sdk/ppu/bin" >> "$GITHUB_PATH"
+      - name: Compile and package read-only probe
+        run: |
+          ppu-gcc --version
+          make
+          sha256sum trophy-probe.pkg > SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: read-only-probe-${{ github.sha }}
+          path: |
+            trophy-probe.pkg
+            SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14

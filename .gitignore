@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+build/
+sdk/
+*.tar.gz
+*.elf
+*.self
+*.pkg
+*.map
+private/
+reports/

@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "record_type": "tool-proposal",
+  "id": "proposal-20261022-ps3-build",
+  "created_at": "2026-10-22T21:54:43Z",
+  "project_id": "ps3-trophy-unlocker-2026",
+  "gap_id": "gap-20261022-ps3-build",
+  "parent_goal_id": "evilnat-trophy-unlocker",
+  "decision": "wire",
+  "selected_approach": "GitHub Actions Ubuntu runner downloads a hash-pinned SDK and builds the read-only probe.",
+  "alternatives": [
+    {
+      "name": "local WSL",
+      "rejected_because": "The scoped invocation returned Access is denied."
+    },
+    {
+      "name": "Sony proprietary SDK",
+      "rejected_because": "Open-source SDK is sufficient for this filesystem probe."
+    }
+  ],
+  "success_condition": "Workflow passes tests and produces a nonempty PKG plus checksum.",
+  "stop_conditions": [
+    "Ten-minute workflow timeout or verified SDK/hash/build failure; return exact evidence."
+  ],
+  "safety": {
+    "read_roots": [
+      "repository",
+      "official pinned SDK URL"
+    ],
+    "write_roots": [
+      "runner workspace",
+      "runner artifact store"
+    ],
+    "max_runtime_seconds": 600,
+    "max_input_bytes": 350000000,
+    "max_concurrency": 1,
+    "network": true,
+    "overwrite": false
+  },
+  "deliverables": {
+    "implementation": ".github/workflows/build.yml",
+    "operator_card": "docs/TOOLS.md",
+    "tests": [
+      "tests/test_sdk_fetch.py"
+    ],
+    "evidence_receipt": "evidence/ps3-build.json",
+    "inventory": "inventory/tools.json"
+  },
+  "dependencies": [
+    "GitHub Actions",
+    "pinned official PS3DEV Linux SDK"
+  ],
+  "risks": [
+    "A PKG compile does not establish console runtime behavior."
+  ],
+  "nonclaims": [
+    "No unlocker is claimed before implementation and console validation."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "record_type": "negative-knowledge",
+  "id": "local-wsl-access",
+  "as_of": "2026-10-22T21:54:43Z",
+  "statement": "The scoped wsl.exe --list --quiet invocation returned Access is denied on this Windows host.",
+  "commands": [
+    "wsl.exe --list --quiet"
+  ],
+  "environment": "Current Windows tool session",
+  "nonclaims": [
+    "Windows cannot build PS3 applications",
+    "No Linux runner exists"
+  ],
+  "escape_paths": [
+    {
+      "trigger": "External build runner available",
+      "action": "Use pinned SDK and record its build outputs."
+    }
+  ]
+}

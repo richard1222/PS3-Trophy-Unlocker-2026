@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "tools": [
+    {
+      "id": "decoded-trophy-inspector",
+      "status": "callable-host-tested",
+      "implementation": "tools/inspect_trophy.py",
+      "sha256": "a820772921e69c4ed85dabfddebf85cdffeed11dab2918b120f94d5314cccc86",
+      "operator_card": "docs/TOOLS.md",
+      "tests": [
+        "tests/test_inspector.py"
+      ],
+      "call": "python tools/inspect_trophy.py INPUT --output NEW.json",
+      "limitations": [
+        "decoded layouts only",
+        "no decryption or writes",
+        "synthetic fixtures; no console file validated"
+      ]
+    },
+    {
+      "id": "pinned-sdk-fetch",
+      "status": "callable-fixture-tested",
+      "implementation": "tools/fetch_sdk.py",
+      "sha256": "c8cfd696fcdba7cf7bce4c1a42ca4a576ab9322e4c952a170283378ff82e36a8",
+      "operator_card": "docs/TOOLS.md",
+      "tests": [
+        "tests/test_sdk_fetch.py"
+      ],
+      "call": "python tools/fetch_sdk.py --output NEW.tar.gz",
+      "limitations": [
+        "actual pinned archive transfer and CI build pending",
+        "does not install a local Linux runtime"
+      ]
+    }
+  ]
+}

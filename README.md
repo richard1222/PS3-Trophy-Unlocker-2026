@@ -43,8 +43,8 @@ The first target is **Evilnat 4.93 CFW**. We will verify the implementation agai
 | Repository | Project initialized; source, findings and test results will be kept here. |
 | Evilnat research | Developer-maintained XAI and Cobra 4.93 source inspected. |
 | Trophy data | Apollo, RPCS3, TROPHYParser and PS3 Developer Wiki references identified and cross-checked. |
-| Native build | Open-source PS3 SDK release identified; reproducible build setup is in progress. |
-| Inspector | Planned first tool: bounded, read-only examination of trophy data. |
+| Native build | Official SDK pinned by SHA-256; CI workflow and read-only probe source added; build result pending. |
+| Inspector | Implemented decoded-layout tool; seven host test methods pass across the inspector and SDK fetcher. |
 | Unlock backend | Not implemented or tested yet. |
 | PS3 validation | Pending; no trophies have been modified by this project. |
 | Release | No package published yet. |
@@ -62,7 +62,7 @@ These are development targets, not available features.
 | Selected-trophy unlock | Update one selected trophy through a verified backend. | Research |
 | Backup before changes | Preserve the complete affected trophy folder and verify the backup. | Planned |
 | Restore | Restore a matching backup with identity checks. | Planned |
-| Data validation | Reject truncated files, invalid offsets and unsupported layouts. | Planned |
+| Data validation | Read-only tool rejects truncated files, invalid offsets, overlaps and unsupported layouts. | Host-tested |
 | Build receipts | Record source revision, build environment and package hashes. | Planned |
 | Console diagnostics | Distinguish file, format, signing and runtime errors. | Planned |
 
@@ -101,7 +101,12 @@ The exact firmware variant and relevant modules will be recorded with console te
 
 ## Quick start
 
-**For now:** read the research and status above. There is no installable package to run yet.
+**Available now:** read-only inspection tools and synthetic tests. There is no working unlocker release yet. See [tool commands and limits](docs/TOOLS.md) and [source research](docs/RESEARCH-2026-10-22.md).
+
+```text
+python -m unittest discover -s tests -v
+python tools/inspect_trophy.py decoded-TROPUSR.DAT --output new-report.json
+```
 
 When a build is ready, this section will contain its exact filename, prerequisites, controller controls, backup location and first-console-test steps. Packages will be linked from [GitHub Releases](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases), with checksums and an explicit description of what they can do.
 
@@ -112,7 +117,7 @@ Do not supply console IDs, account credentials or private trophy backups in publ
 | Milestone | Completion condition | Status |
 | --- | --- | --- |
 | 1. Source and documentation research | Pin useful developer sources and separate observed facts from assumptions. | In progress |
-| 2. Read-only inspection tools | Parse supported layouts, reject malformed inputs and pass positive/negative tests. | Planned |
+| 2. Read-only inspection tools | Seven host test methods pass; real console data remains unverified. | Host-tested |
 | 3. Reproducible PS3 build | Build with a pinned open-source SDK and record the output identity. | In progress |
 | 4. Read-only console probe | Verify installed-set discovery on the target console without trophy writes. | Planned |
 | 5. Backup and restore | Demonstrate complete backup verification and recovery on controlled test data. | Planned |

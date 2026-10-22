@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "record_type": "evidence-receipt",
+  "id": "evidence-20261022-host-tools",
+  "created_at": "2026-10-22T21:54:43Z",
+  "project_id": "ps3-trophy-unlocker-2026",
+  "parent_goal_id": "evilnat-trophy-unlocker",
+  "tool_id": "decoded-trophy-inspector",
+  "status": "passed",
+  "execution": {
+    "command": "python -m unittest discover -s tests -v",
+    "cwd": ".",
+    "environment": "Windows, bundled Python 3, standard library",
+    "exit_code": 0
+  },
+  "artifacts": [
+    {
+      "path": "tools/inspect_trophy.py",
+      "sha256": "a820772921e69c4ed85dabfddebf85cdffeed11dab2918b120f94d5314cccc86",
+      "bytes": 4589
+    },
+    {
+      "path": "tests/test_inspector.py",
+      "sha256": "5778823fa5b78cc9662b080375105dda06a6567e33b6b0e896a04e79efa72cb5",
+      "bytes": 3429
+    },
+    {
+      "path": "tools/fetch_sdk.py",
+      "sha256": "c8cfd696fcdba7cf7bce4c1a42ca4a576ab9322e4c952a170283378ff82e36a8",
+      "bytes": 2528
+    },
+    {
+      "path": "tests/test_sdk_fetch.py",
+      "sha256": "ab7707440f26fc8033035079ac80d44975c3affb5788a24864029873ff7a0bc5",
+      "bytes": 1318
+    }
+  ],
+  "assertions": [
+    "7 test methods pass",
+    "all 736 truncated fixture prefixes rejected",
+    "12 malformed fixture mutations rejected",
+    "sparse and reordered trophy IDs handled",
+    "CLI input preservation, stable UTF-8 output and output overwrite refusal pass",
+    "SDK fixture bytes deterministic; hash mismatch and byte-limit failures remove temporary outputs"
+  ],
+  "nonclaims": [
+    "Actual trophy files, SDK download, PS3 compilation and hardware execution not covered by this host receipt."
+  ]
+}

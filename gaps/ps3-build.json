@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "record_type": "gap-assessment",
+  "id": "gap-20261022-ps3-build",
+  "created_at": "2026-10-22T21:54:43Z",
+  "project_id": "ps3-trophy-unlocker-2026",
+  "parent_goal": {
+    "id": "evilnat-trophy-unlocker",
+    "objective": "Build a trophy unlocker for Evilnat 4.93 CFW",
+    "acceptance_test": "A recoverable selected-trophy change verified on the target console",
+    "return_artifact": "A source-pinned read-only probe PKG and build receipt for the initial console discovery milestone"
+  },
+  "question": "Can the pinned official Linux SDK build the read-only probe PKG through GitHub Actions?",
+  "required_capability": "ps3-cross-build",
+  "state": "present-unwired",
+  "scope": {
+    "inputs": [
+      {
+        "path": "toolchain.lock.json",
+        "sha256": "d421c893453d313a0c1b7c19d16eb58f530a2b02dfdcad460eb364a056cdc807"
+      }
+    ],
+    "exclusions": [
+      "console unlock behavior",
+      "firmware modification",
+      "private credentials"
+    ],
+    "environment": "Windows host; Python available; Linux SDK release identified; CI wiring pending",
+    "max_runtime_seconds": 600,
+    "max_input_bytes": 350000000,
+    "max_concurrency": 1,
+    "network": true
+  },
+  "inventory_search": {
+    "inventory_path": "inventory/tools.json",
+    "performed_at": "2026-10-22T21:54:43Z",
+    "commands": [
+      "Get-Command git,make,docker,wsl,clang,gcc -ErrorAction SilentlyContinue",
+      "wsl.exe --list --quiet"
+    ],
+    "paths": [
+      "project workspace",
+      "declared tool inventory",
+      "bounded PS3-related Downloads directories"
+    ],
+    "candidates": [
+      {
+        "id": "wsl",
+        "finding": "invocation returned Access is denied"
+      },
+      {
+        "id": "official-linux-sdk",
+        "finding": "release asset present; exact hash pinned; remote runner not yet wired"
+      }
+    ],
+    "conclusion": "Use the official Linux SDK in a bounded GitHub job instead of changing host settings.",
+    "limitations": [
+      "No claim that compilers are universally absent from the PC."
+    ]
+  },
+  "observations": [
+    "No console mutation has occurred."
+  ],
+  "nonclaims": [
+    "A successful compiler run would not prove trophy unlock or hardware compatibility."
+  ],
+  "escape_paths": [
+    {
+      "trigger": "CI unavailable",
+      "action": "Keep tested host tools and source; report exact CI failure and use a permitted Linux runner."
+    }
+  ],
+  "status": "open"
+}
