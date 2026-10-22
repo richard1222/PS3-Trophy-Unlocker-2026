@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: MIT
  * Read-only trophy discovery probe. This is not an unlock implementation.
- * Writes only a new report inside this application's own USRDIR.
+ * Writes only new diagnostics in app-owned locations or an attached USB root.
  */
 #include <sys/file.h>
 #include <stdint.h>
@@ -13,6 +13,40 @@
 #define MAX_SETS 1024
 static int report_fd = -1;
 static int report_failed = 0;
+
+static int begin_report(void)
+{
+    const char *roots[] = { REPORT_ROOT, "/dev_hdd0/tmp/troph2026", "/dev_usb000", "/dev_usb001" };
+    int errors[4] = {0,0,0,0};
+    char path[512];
+    /* The temporary fallback is app-specific. Never alter trophy folders. */
+    sysLv2FsMkdir("/dev_hdd0/tmp/troph2026",0700);
+    for(unsigned root=0;root<4;root++){
+        for(unsigned index=1;index<=999;index++){
+            snprintf(path,sizeof(path),"%s/trophy-probe-diag-%03u.txt",roots[root],index);
+            int candidate=-1;
+            int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
+            if(!result){
+                static const char marker[]="stage=main_entered\nprobe_version=0.0.2\n";
+                u64 written=0;
+                report_fd=candidate;
+                if(sysLv2FsWrite(report_fd,marker,sizeof(marker)-1,&written)||written!=sizeof(marker)-1||sysLv2FsFsync(report_fd))
+                    report_failed=1;
+                for(unsigned prior=0;prior<root;prior++){
+                    char message[96];
+                    int length=snprintf(message,sizeof(message),"report_root_%u_open_error=0x%08x\n",prior,(unsigned)errors[prior]);
+                    if(length<0||(size_t)length>=sizeof(message)||sysLv2FsWrite(report_fd,message,(u64)length,&written)||written!=(u64)length)
+                        report_failed=1;
+                }
+                return 0;
+            }
+            errors[root]=result;
+            sysFSStat info;
+            if(sysLv2FsStat(path,&info))break;
+        }
+    }
+    return -1;
+}
 
 static void line(const char *format, ...)
 {
@@ -59,16 +93,10 @@ static void inspect_header(const char *root, const char *file)
 
 int main(void)
 {
-    char path[512];int home_fd;sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
-    for(unsigned index=1;index<=999;index++){
-        snprintf(path,sizeof(path),REPORT_ROOT "/probe-%03u.txt",index);
-        int candidate=-1;
-        int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
-        if(!result){report_fd=candidate;break;}
-        sysFSStat st;if(sysLv2FsStat(path,&st))return 2;
-    }
-    if(report_fd<0)return 2;
-    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.1\nNo trophy writes, syscall8, account/console identifiers or PSN calls.\n");
+    char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
+    if(begin_report())return 2;
+    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.2\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
+    if(sysLv2FsFsync(report_fd))report_failed=1;
     int error=sysLv2FsOpenDir("/dev_hdd0/home",&home_fd);
     if(error){line("home_open_error=0x%08x\n",(unsigned)error);report_failed=1;goto finish;}
     unsigned home_entries=0;
@@ -80,7 +108,7 @@ int main(void)
         if(!digits(user.d_name,8))continue;
         users++;
         snprintf(path,sizeof(path),"/dev_hdd0/home/%.8s/trophy",user.d_name);
-        int trophy_fd;sysFSDirent set;
+        int trophy_fd;static sysFSDirent set;
         error=sysLv2FsOpenDir(path,&trophy_fd);
         if(error){line("user=%s trophy_open_error=0x%08x\n",user.d_name,(unsigned)error);continue;}
         unsigned set_entries=0;
@@ -105,3 +133,4 @@ finish:
     sysLv2FsClose(report_fd);
     return report_failed?3:0;
 }
+
