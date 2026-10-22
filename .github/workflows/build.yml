@@ -29,12 +29,16 @@ jobs:
         run: |
           ppu-gcc --version
           make
-          sha256sum trophy-probe.pkg > SHA256SUMS.txt
+          ppu-readelf -h trophy-startup.elf
+          sha256sum trophy-startup.pkg > SHA256SUMS.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: read-only-probe-${{ github.sha }}
           path: |
-            trophy-probe.pkg
+            trophy-startup.pkg
+            trophy-startup.elf
+            trophy-startup.map
             SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
+

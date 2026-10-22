@@ -1,18 +1,19 @@
 ifndef PSL1GHT
 $(error Set PSL1GHT to the pinned SDK root)
 endif
-TITLE := PS3 Trophy Read-Only Probe
+TITLE := PS3 Trophy Startup Test
 APPID := TROPH2026
 CONTENTID := UP0001-$(APPID)_00-0000000000000001
-TARGET := trophy-probe
+TARGET := trophy-startup
 BUILDDIR := $(CURDIR)/build
 include $(PSL1GHT)/ppu_rules
 
 .PHONY: all
 all: $(TARGET).pkg
 
-$(TARGET).elf: source/probe.c
-	$(CC) -std=gnu99 -O2 -Wall -Wextra -Werror $(MACHDEP) $(LIBPSL1GHT_INC) $< $(LIBPSL1GHT_LIB) -lsysutil -llv2 -o $@
+$(TARGET).elf: source/startup.c source/rsxutil.c source/rsxutil.h
+	$(CC) -std=gnu99 -O2 -Wall -Wextra -Werror -mcpu=cell $(MACHDEP) $(LIBPSL1GHT_INC) source/startup.c source/rsxutil.c $(LIBPSL1GHT_LIB) -lrsx -lgcm_sys -lsysutil -lrt -llv2 -lm -Wl,-Map,trophy-startup.map -o $@
 
 $(TARGET).self: $(TARGET).elf
 $(TARGET).pkg: $(TARGET).self
+
