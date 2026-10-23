@@ -1,0 +1,25 @@
+name: Publish v0.0.8 development preview
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v0.0.8/README.md'
+      - '.github/workflows/publish-v008-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create public source-only development release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v0.0.8-dev-preview-20261022"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release already exists; leaving it unchanged"
+          else
+            gh release create "$TAG" --target "$GITHUB_SHA" --title "v0.0.8 Development Preview (source only)" --notes-file releases/v0.0.8/README.md --prerelease
+          fi
