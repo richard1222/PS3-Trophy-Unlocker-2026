@@ -11,7 +11,7 @@ forbidden = (
     "sceNpTrophySetSoundLevel",
 )
 # Only actual C symbol references matter, not this Python file.
-hits = [name for name in forbidden if re.search(r"\\b" + name + r"\\b", source)]
+hits = [name for name in forbidden if re.search(r"\b" + name + r"\b", source)]
 if hits:
     sys.exit("Unexpected write-capable references: " + ", ".join(hits))
 print("Read-only probe source gate passed.")
