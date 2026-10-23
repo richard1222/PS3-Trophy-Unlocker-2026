@@ -58,7 +58,7 @@ static int begin_report(void)
             int candidate=-1;
             int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
             if(!result){
-                static const char marker[]="stage=main_entered\nprobe_version=0.0.2\n";
+                static const char marker[]="stage=main_entered\nprobe_version=0.0.12-preflight\n";
                 u64 written=0;
                 report_fd=candidate;
                 if(sysLv2FsWrite(report_fd,marker,sizeof(marker)-1,&written)||written!=sizeof(marker)-1||sysLv2FsFsync(report_fd))
@@ -122,12 +122,43 @@ static void inspect_header(const char *root, const char *file)
     line("\n");
 }
 
+/* Inspect a bounded configuration snapshot; no trophy data is changed.
+ * Matching markers is preflight evidence, NOT native context registration.
+ */
+static void target_config_preflight(const char *root)
+{
+    char path[512];
+    int fd=-1, error;
+    u64 n=0, total=0;
+    static unsigned char data[131072 + 1];
+    if(snprintf(path,sizeof(path),"%s/TROPCONF.SFM",root)>=(int)sizeof(path))return;
+    error=sysLv2FsOpen(path,SYS_O_RDONLY,&fd,0,NULL,0);
+    if(error){line("  context_preflight_config_open=0x%08x\\n",(unsigned)error);return;}
+    error=sysLv2FsRead(fd,data,sizeof(data)-1,&n);
+    sysLv2FsClose(fd);
+    if(error){line("  context_preflight_config_read=0x%08x\\n",(unsigned)error);return;}
+    total=n;
+    data[total]=0;
+    /* An SFM may contain XML; search bounded bytes, not untrusted pointers. */
+    const char *title="Merciless Executioner";
+    const char *count="trophy";
+    unsigned found_title=0, found_trophy_tag=0;
+    const size_t tlen=strlen(title),clen=strlen(count);
+    for(size_t i=0;i+tlen<=total;i++)
+        if(!memcmp(data+i,title,tlen)){found_title=1;break;}
+    for(size_t i=0;i+clen<=total;i++)
+        if(!memcmp(data+i,count,clen)){found_trophy_tag=1;break;}
+    line("  context_preflight=read_only bytes=%llu expected_trophy_name=%u trophy_marker=%u\\n",
+         (unsigned long long)total,found_title,found_trophy_tag);
+    line("  native_context_registered=UNTESTED\\n");
+}
+
 int trophy_discovery(void)
 {
     catalog_count=0;report_fd=-1;report_failed=0;
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
-    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.2\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
+    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.12-preflight\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
     if(sysLv2FsFsync(report_fd))report_failed=1;
     int error=sysLv2FsOpenDir("/dev_hdd0/home",&home_fd);
     if(error){line("home_open_error=0x%08x\n",(unsigned)error);report_failed=1;goto finish;}
@@ -156,6 +187,7 @@ int trophy_discovery(void)
             sets++;line("user=%s set=%s\n",user.d_name,set.d_name);
             snprintf(path,sizeof(path),"/dev_hdd0/home/%.8s/trophy/%.12s",user.d_name,set.d_name);
             inspect_header(path,"TROPUSR.DAT");inspect_header(path,"TROPTRNS.DAT");
+            if(!strcmp(set.d_name,"NPWR11866_00"))target_config_preflight(path);
         }
         if(set_entries>16384)line("user_directory_limit_reached=1\n");
         sysLv2FsCloseDir(trophy_fd);
