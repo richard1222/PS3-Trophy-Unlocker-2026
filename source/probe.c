@@ -58,7 +58,7 @@ static int begin_report(void)
             int candidate=-1;
             int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
             if(!result){
-                static const char marker[]="stage=main_entered\nprobe_version=0.0.14-integrity\n";
+                static const char marker[]="stage=main_entered\nprobe_version=0.0.15-state-check\n";
                 u64 written=0;
                 report_fd=candidate;
                 if(sysLv2FsWrite(report_fd,marker,sizeof(marker)-1,&written)||written!=sizeof(marker)-1||sysLv2FsFsync(report_fd))
@@ -162,6 +162,69 @@ static void target_state_integrity(const char *root)
     }
 }
 
+/* Validated read-only table lookup. Treat all layout failures as UNKNOWN. */
+static void target_trophy_state(const char *root)
+{
+    char path[512];
+    int fd=-1, err=0;
+    unsigned char header[48], tables[32*32], entry[112];
+    u64 got=0;
+    sysFSStat st;
+    unsigned n=0, found_grade=0,found_state=0,grade=0,state=0;
+    uint64_t offsets[2]={0,0};
+    unsigned strides[2]={0,0}, counts[2]={0,0};
+    int valid=1;
+    if(snprintf(path,sizeof(path),"%s/TROPUSR.DAT",root)>=(int)sizeof(path))return;
+    err=sysLv2FsStat(path,&st);
+    if(err||st.st_size<80||st.st_size>4*1024*1024ULL){line("  state_parse=UNKNOWN reason=size_or_stat\n");return;}
+    err=sysLv2FsOpen(path,SYS_O_RDONLY,&fd,0,NULL,0);
+    if(err){line("  state_parse=UNKNOWN reason=open\n");return;}
+    err=sysLv2FsRead(fd,header,sizeof(header),&got);
+    if(err||got!=sizeof(header)||be32(header)!=0x818f54ad||be32(header+4)!=0x00010000){valid=0;goto done;}
+    n=be32(header+8);
+    if(!n||n>32||48ULL+n*32ULL>(u64)st.st_size){valid=0;goto done;}
+    got=0;
+    err=sysLv2FsRead(fd,tables,n*32,&got);
+    if(err||got!=n*32){valid=0;goto done;}
+    for(unsigned i=0;i<n;i++){
+        const unsigned char *p=tables+i*32;
+        unsigned kind=be32(p),size=be32(p+4),count=be32(p+12);
+        uint64_t off=((uint64_t)be32(p+16)<<32)|be32(p+20);
+        if(kind!=4&&kind!=6)continue;
+        unsigned k=kind==4?0:1, expected=kind==4?80:96;
+        if((k==0&&found_grade)||(k==1&&found_state)||size!=expected||count>4096||
+           off>(u64)st.st_size||((uint64_t)(size+16)*count)>(u64)st.st_size-off){
+            valid=0;goto done;
+        }
+        offsets[k]=off;strides[k]=size+16;counts[k]=count;
+        if(k==0)found_grade=1;else found_state=1;
+    }
+    if(!found_grade||!found_state){valid=0;goto done;}
+    unsigned matches[2]={0,0};
+    for(unsigned k=0;k<2;k++){
+        for(unsigned i=0;i<counts[k];i++){
+            u64 pos=offsets[k]+(u64)i*strides[k];
+            if(sysLv2FsLSeek64(fd,pos,SEEK_SET,NULL)){valid=0;goto done;}
+            got=0;
+            err=sysLv2FsRead(fd,entry,strides[k],&got);
+            if(err||got!=strides[k]||be32(entry)!=(k==0?4U:6U)||
+               be32(entry+4)!=strides[k]-16){valid=0;goto done;}
+            if(be32(entry+16)==11){
+                if(++matches[k]!=1){valid=0;goto done;}
+                unsigned value=be32(entry+20);
+                if(k==0){if(value<1||value>4){valid=0;goto done;}grade=value;}
+                else{if(value>1){valid=0;goto done;}state=value;}
+            }
+        }
+    }
+    if(matches[0]!=1||matches[1]!=1){valid=0;goto done;}
+done:
+    sysLv2FsClose(fd);
+    if(valid)line("  trophy_11_state=%s grade=%u source=decoded_tables_unverified_on_retail\n",
+                  state?"UNLOCKED":"LOCKED",grade);
+    else line("  trophy_11_state=UNKNOWN state_parse=UNSUPPORTED_OR_INVALID error=0x%08x\n",(unsigned)err);
+}
+
 /* Inspect a bounded configuration snapshot; no trophy data is changed.
  * Matching markers is preflight evidence, NOT native context registration.
  */
@@ -211,7 +274,7 @@ int trophy_discovery(void)
     catalog_count=0;report_fd=-1;report_failed=0;
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
-    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.14-integrity\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
+    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.15-state-check\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
     if(sysLv2FsFsync(report_fd))report_failed=1;
     int error=sysLv2FsOpenDir("/dev_hdd0/home",&home_fd);
     if(error){line("home_open_error=0x%08x\n",(unsigned)error);report_failed=1;goto finish;}
@@ -240,7 +303,7 @@ int trophy_discovery(void)
             sets++;line("user=%s set=%s\n",user.d_name,set.d_name);
             snprintf(path,sizeof(path),"/dev_hdd0/home/%.8s/trophy/%.12s",user.d_name,set.d_name);
             inspect_header(path,"TROPUSR.DAT");inspect_header(path,"TROPTRNS.DAT");
-            if(!strcmp(set.d_name,"NPWR11866_00")){target_config_preflight(path);target_state_integrity(path);}
+            if(!strcmp(set.d_name,"NPWR11866_00")){target_config_preflight(path);target_state_integrity(path);target_trophy_state(path);}
         }
         if(set_entries>16384)line("user_directory_limit_reached=1\n");
         sysLv2FsCloseDir(trophy_fd);
