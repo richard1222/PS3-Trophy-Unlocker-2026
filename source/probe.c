@@ -58,7 +58,7 @@ static int begin_report(void)
             int candidate=-1;
             int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
             if(!result){
-                static const char marker[]="stage=main_entered\nprobe_version=0.0.12-preflight\n";
+                static const char marker[]="stage=main_entered\nprobe_version=0.0.13-metadata\n";
                 u64 written=0;
                 report_fd=candidate;
                 if(sysLv2FsWrite(report_fd,marker,sizeof(marker)-1,&written)||written!=sizeof(marker)-1||sysLv2FsFsync(report_fd))
@@ -150,7 +150,20 @@ static void target_config_preflight(const char *root)
         if(!memcmp(data+i,count,clen)){found_trophy_tag=1;break;}
     line("  context_preflight=read_only bytes=%llu expected_trophy_name=%u trophy_marker=%u\n",
          (unsigned long long)total,found_title,found_trophy_tag);
-    line("  native_context_registered=UNTESTED\n");
+    /* Target trophy metadata may be inspected, but unlock state remains unknown.
+     * Never derive "locked/unlocked" from the configuration file.
+     */
+    unsigned found_id_011=0,found_id_11=0;
+    const char *id011="id=\\"011\\"";
+    const char *id11="id=\\"11\\"";
+    for(size_t i=0;i+strlen(id011)<=total;i++)
+        if(!memcmp(data+i,id011,strlen(id011))){found_id_011=1;break;}
+    for(size_t i=0;i+strlen(id11)<=total;i++)
+        if(!memcmp(data+i,id11,strlen(id11))){found_id_11=1;break;}
+    line("  target_trophy_id=11 name=Merciless_Executioner id_marker=%u name_marker=%u\\n",
+         found_id_011||found_id_11,found_title);
+    line("  target_trophy_unlock_state=UNKNOWN requires_validated_state_parser_or_native_api\\n");
+    line("  native_context_registered=UNTESTED\\n");
 }
 
 int trophy_discovery(void)
@@ -158,7 +171,7 @@ int trophy_discovery(void)
     catalog_count=0;report_fd=-1;report_failed=0;
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
-    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.12-preflight\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
+    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.13-metadata\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
     if(sysLv2FsFsync(report_fd))report_failed=1;
     int error=sysLv2FsOpenDir("/dev_hdd0/home",&home_fd);
     if(error){line("home_open_error=0x%08x\n",(unsigned)error);report_failed=1;goto finish;}
