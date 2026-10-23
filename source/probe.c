@@ -182,9 +182,9 @@ static void target_trophy_state(const char *root)
     err=sysLv2FsOpen(path,SYS_O_RDONLY,&fd,0,NULL,0);
     if(err){line("  state_parse=UNKNOWN reason=open\n");return;}
     err=sysLv2FsRead(fd,header,sizeof(header),&got);
-    if(err||got!=sizeof(header)||be32(header)!=0x818f54ad||be32(header+4)!=0x00010000){valid=0;reason="validation";goto done;}
+    if(err||got!=sizeof(header)||be32(header)!=0x818f54ad||be32(header+4)!=0x00010000){valid=0;reason="header_read_or_magic";goto done;}
     n=be32(header+8);
-    if(!n||n>32||48ULL+n*32ULL>(u64)st.st_size){valid=0;reason="validation";goto done;}
+    if(!n||n>32||48ULL+n*32ULL>(u64)st.st_size){valid=0;reason="table_count_or_bounds";goto done;}
     got=0;
     err=sysLv2FsRead(fd,tables,n*32,&got);
     if(err||got!=n*32){valid=0;reason="table_directory_read";goto done;}
