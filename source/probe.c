@@ -154,16 +154,16 @@ static void target_config_preflight(const char *root)
      * Never derive "locked/unlocked" from the configuration file.
      */
     unsigned found_id_011=0,found_id_11=0;
-    const char *id011="id=\\"011\\"";
-    const char *id11="id=\\"11\\"";
+    const char *id011="id=\"011\"";
+    const char *id11="id=\"11\"";
     for(size_t i=0;i+strlen(id011)<=total;i++)
         if(!memcmp(data+i,id011,strlen(id011))){found_id_011=1;break;}
     for(size_t i=0;i+strlen(id11)<=total;i++)
         if(!memcmp(data+i,id11,strlen(id11))){found_id_11=1;break;}
-    line("  target_trophy_id=11 name=Merciless_Executioner id_marker=%u name_marker=%u\\n",
+    line("  target_trophy_id=11 name=Merciless_Executioner id_marker=%u name_marker=%u\n",
          found_id_011||found_id_11,found_title);
-    line("  target_trophy_unlock_state=UNKNOWN requires_validated_state_parser_or_native_api\\n");
-    line("  native_context_registered=UNTESTED\\n");
+    line("  target_trophy_unlock_state=UNKNOWN requires_validated_state_parser_or_native_api\n");
+    line("  native_context_registered=UNTESTED\n");
 }
 
 int trophy_discovery(void)
