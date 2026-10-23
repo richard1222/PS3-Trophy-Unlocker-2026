@@ -58,7 +58,7 @@ static int begin_report(void)
             int candidate=-1;
             int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
             if(!result){
-                static const char marker[]="stage=main_entered\nprobe_version=0.0.15-state-check\n";
+                static const char marker[]="stage=main_entered\nprobe_version=0.0.16-diagnostics\n";
                 u64 written=0;
                 report_fd=candidate;
                 if(sysLv2FsWrite(report_fd,marker,sizeof(marker)-1,&written)||written!=sizeof(marker)-1||sysLv2FsFsync(report_fd))
@@ -174,55 +174,59 @@ static void target_trophy_state(const char *root)
     uint64_t offsets[2]={0,0};
     unsigned strides[2]={0,0}, counts[2]={0,0};
     int valid=1;
+    const char *reason="none";
+    unsigned failure_table=0, failure_entry=0;
     if(snprintf(path,sizeof(path),"%s/TROPUSR.DAT",root)>=(int)sizeof(path))return;
     err=sysLv2FsStat(path,&st);
     if(err||st.st_size<80||st.st_size>4*1024*1024ULL){line("  state_parse=UNKNOWN reason=size_or_stat\n");return;}
     err=sysLv2FsOpen(path,SYS_O_RDONLY,&fd,0,NULL,0);
     if(err){line("  state_parse=UNKNOWN reason=open\n");return;}
     err=sysLv2FsRead(fd,header,sizeof(header),&got);
-    if(err||got!=sizeof(header)||be32(header)!=0x818f54ad||be32(header+4)!=0x00010000){valid=0;goto done;}
+    if(err||got!=sizeof(header)||be32(header)!=0x818f54ad||be32(header+4)!=0x00010000){valid=0;reason="validation";goto done;}
     n=be32(header+8);
-    if(!n||n>32||48ULL+n*32ULL>(u64)st.st_size){valid=0;goto done;}
+    if(!n||n>32||48ULL+n*32ULL>(u64)st.st_size){valid=0;reason="validation";goto done;}
     got=0;
     err=sysLv2FsRead(fd,tables,n*32,&got);
-    if(err||got!=n*32){valid=0;goto done;}
+    if(err||got!=n*32){valid=0;reason="table_directory_read";goto done;}
     for(unsigned i=0;i<n;i++){
         const unsigned char *p=tables+i*32;
+        failure_table=i;
         unsigned kind=be32(p),size=be32(p+4),count=be32(p+12);
         uint64_t off=((uint64_t)be32(p+16)<<32)|be32(p+20);
         if(kind!=4&&kind!=6)continue;
         unsigned k=kind==4?0:1, expected=kind==4?80:96;
         if((k==0&&found_grade)||(k==1&&found_state)||size!=expected||count>4096||
            off>(u64)st.st_size||((uint64_t)(size+16)*count)>(u64)st.st_size-off){
-            valid=0;goto done;
+            valid=0;reason="table_bounds_or_stride";goto done;
         }
         offsets[k]=off;strides[k]=size+16;counts[k]=count;
         if(k==0)found_grade=1;else found_state=1;
     }
-    if(!found_grade||!found_state){valid=0;goto done;}
+    if(!found_grade||!found_state){valid=0;reason="missing_type4_or_type6";goto done;}
     unsigned matches[2]={0,0};
     for(unsigned k=0;k<2;k++){
         for(unsigned i=0;i<counts[k];i++){
             u64 pos=offsets[k]+(u64)i*strides[k];
-            if(sysLv2FsLSeek64(fd,pos,SEEK_SET,NULL)){valid=0;goto done;}
+            failure_table=k==0?4:6;failure_entry=i;
+            if(sysLv2FsLSeek64(fd,pos,SEEK_SET,NULL)){valid=0;reason="entry_seek";goto done;}
             got=0;
             err=sysLv2FsRead(fd,entry,strides[k],&got);
             if(err||got!=strides[k]||be32(entry)!=(k==0?4U:6U)||
-               be32(entry+4)!=strides[k]-16){valid=0;goto done;}
+               be32(entry+4)!=strides[k]-16){valid=0;reason="entry_header_or_read";goto done;}
             if(be32(entry+16)==11){
-                if(++matches[k]!=1){valid=0;goto done;}
+                if(++matches[k]!=1){valid=0;reason="duplicate_target_id";goto done;}
                 unsigned value=be32(entry+20);
-                if(k==0){if(value<1||value>4){valid=0;goto done;}grade=value;}
-                else{if(value>1){valid=0;goto done;}state=value;}
+                if(k==0){if(value<1||value>4){valid=0;reason="invalid_grade";goto done;}grade=value;}
+                else{if(value>1){valid=0;reason="invalid_state";goto done;}state=value;}
             }
         }
     }
-    if(matches[0]!=1||matches[1]!=1){valid=0;goto done;}
+    if(matches[0]!=1||matches[1]!=1){valid=0;reason="target_missing_from_table";goto done;}
 done:
     sysLv2FsClose(fd);
     if(valid)line("  trophy_11_state=%s grade=%u source=decoded_tables_unverified_on_retail\n",
                   state?"UNLOCKED":"LOCKED",grade);
-    else line("  trophy_11_state=UNKNOWN state_parse=UNSUPPORTED_OR_INVALID error=0x%08x\n",(unsigned)err);
+    else line("  trophy_11_state=UNKNOWN state_parse=UNSUPPORTED_OR_INVALID reason=%s table=%u entry=%u error=0x%08x\n",reason,failure_table,failure_entry,(unsigned)err);
 }
 
 /* Inspect a bounded configuration snapshot; no trophy data is changed.
@@ -274,7 +278,7 @@ int trophy_discovery(void)
     catalog_count=0;report_fd=-1;report_failed=0;
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
-    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.15-state-check\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
+    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.16-diagnostics\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
     if(sysLv2FsFsync(report_fd))report_failed=1;
     int error=sysLv2FsOpenDir("/dev_hdd0/home",&home_fd);
     if(error){line("home_open_error=0x%08x\n",(unsigned)error);report_failed=1;goto finish;}
