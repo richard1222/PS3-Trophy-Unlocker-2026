@@ -178,6 +178,8 @@ An inspection-only build will be labeled **read-only**. A development probe will
 
 ## Credits and attribution
 
+**Project creator and lead tester: Richard1222/Saber.**
+
 This is an independent community project. Research and code from **Evilnat, mysis, bucanero, darkautism, RPCS3 contributors and ps3dev contributors** are credited to their respective authors. Other contributors will be credited as their work is used.
 
 Links do not imply endorsement or collaboration. Referenced projects retain their own licenses; reused source will retain the required notices and license terms. No Sony SDK, firmware modules, keys, account credentials or private console data will be packaged in releases.
