@@ -4,6 +4,7 @@
 - Target: Persona 5 (BLUS31604), trophy ID 11, "Merciless Executioner".
 - Console context (owner-supplied): PS3 on Evilnat 4.93 D-PEX with webMAN MOD and PS3MAPI.
 - Scope honored throughout: **no trophy files were modified, no live game memory was patched, and no PSN synchronization was attempted.** Console access for this research was read-only: FTP directory listings and one read of an installed trophy *configuration* file (TROPCONF.SFM). No user trophy data file (TROPUSR.DAT) was read or touched.
+- Companion document: `PS3-October-2026-Key-Discoveries-Muse-Research.md` — the October 2026 metldr.2/lv0ldr.2 key publications and their (limited, firmware-layer) implications for this project.
 - Labeling: **[VERIFIED]** = established from primary source read for this document (source pinned in §11). **[THEORY]** = reasoned inference or untested claim, with the experiment that would settle it. This continues the labeling style of `docs/RESEARCH-2026-10-22.md`, which this document extends rather than replaces.
 
 ## 1. Executive summary
