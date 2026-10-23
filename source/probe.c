@@ -58,7 +58,7 @@ static int begin_report(void)
             int candidate=-1;
             int result=sysLv2FsOpen(path,SYS_O_WRONLY|SYS_O_CREAT|SYS_O_EXCL,&candidate,0600,NULL,0);
             if(!result){
-                static const char marker[]="stage=main_entered\nprobe_version=0.0.16-diagnostics\n";
+                static const char marker[]="stage=main_entered\nprobe_version=0.0.17-seek\n";
                 u64 written=0;
                 report_fd=candidate;
                 if(sysLv2FsWrite(report_fd,marker,sizeof(marker)-1,&written)||written!=sizeof(marker)-1||sysLv2FsFsync(report_fd))
@@ -208,7 +208,13 @@ static void target_trophy_state(const char *root)
         for(unsigned i=0;i<counts[k];i++){
             u64 pos=offsets[k]+(u64)i*strides[k];
             failure_table=k==0?4:6;failure_entry=i;
-            if(sysLv2FsLSeek64(fd,pos,SEEK_SET,NULL)){valid=0;reason="entry_seek";goto done;}
+            u64 actual_pos=0;
+            err=sysLv2FsLSeek64(fd,pos,SEEK_SET,&actual_pos);
+            if(err||actual_pos!=pos){
+                line("  seek_diagnostic requested=%llu actual=%llu return=0x%08x table=%u entry=%u\n",
+                     (unsigned long long)pos,(unsigned long long)actual_pos,(unsigned)err,failure_table,failure_entry);
+                valid=0;reason=err?"entry_seek_error":"entry_seek_position_mismatch";goto done;
+            }
             got=0;
             err=sysLv2FsRead(fd,entry,strides[k],&got);
             if(err||got!=strides[k]||be32(entry)!=(k==0?4U:6U)||
@@ -278,7 +284,7 @@ int trophy_discovery(void)
     catalog_count=0;report_fd=-1;report_failed=0;
     char path[512];int home_fd;static sysFSDirent user;u64 read=0;unsigned users=0,sets=0;
     if(begin_report())return 2;
-    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.16-diagnostics\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
+    line("PS3 Trophy Unlocker 2026: READ-ONLY discovery probe v0.0.17-seek\nLocal numeric user folders are logged; no trophy writes or PSN calls.\nstage=opening_home\n");
     if(sysLv2FsFsync(report_fd))report_failed=1;
     int error=sysLv2FsOpenDir("/dev_hdd0/home",&home_fd);
     if(error){line("home_open_error=0x%08x\n",(unsigned)error);report_failed=1;goto finish;}
