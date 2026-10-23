@@ -1,0 +1,26 @@
+name: Publish v0.0.10 development progress
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/v0.0.10/README.md'
+      - '.github/workflows/publish-v010-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Publish progress report without package assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=v0.0.10-dev-preview-20261023
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title 'v0.0.10 Development Progress' --notes-file releases/v0.0.10/README.md --prerelease
+          else
+            gh release create "$TAG" --target "$GITHUB_SHA" --title 'v0.0.10 Development Progress' --notes-file releases/v0.0.10/README.md --prerelease
+          fi
