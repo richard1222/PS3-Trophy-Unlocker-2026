@@ -133,10 +133,10 @@ static void target_config_preflight(const char *root)
     static unsigned char data[131072 + 1];
     if(snprintf(path,sizeof(path),"%s/TROPCONF.SFM",root)>=(int)sizeof(path))return;
     error=sysLv2FsOpen(path,SYS_O_RDONLY,&fd,0,NULL,0);
-    if(error){line("  context_preflight_config_open=0x%08x\\n",(unsigned)error);return;}
+    if(error){line("  context_preflight_config_open=0x%08x\n",(unsigned)error);return;}
     error=sysLv2FsRead(fd,data,sizeof(data)-1,&n);
     sysLv2FsClose(fd);
-    if(error){line("  context_preflight_config_read=0x%08x\\n",(unsigned)error);return;}
+    if(error){line("  context_preflight_config_read=0x%08x\n",(unsigned)error);return;}
     total=n;
     data[total]=0;
     /* An SFM may contain XML; search bounded bytes, not untrusted pointers. */
@@ -148,9 +148,9 @@ static void target_config_preflight(const char *root)
         if(!memcmp(data+i,title,tlen)){found_title=1;break;}
     for(size_t i=0;i+clen<=total;i++)
         if(!memcmp(data+i,count,clen)){found_trophy_tag=1;break;}
-    line("  context_preflight=read_only bytes=%llu expected_trophy_name=%u trophy_marker=%u\\n",
+    line("  context_preflight=read_only bytes=%llu expected_trophy_name=%u trophy_marker=%u\n",
          (unsigned long long)total,found_title,found_trophy_tag);
-    line("  native_context_registered=UNTESTED\\n");
+    line("  native_context_registered=UNTESTED\n");
 }
 
 int trophy_discovery(void)
