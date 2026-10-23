@@ -10,6 +10,8 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 Updated October 23, 2026.
 
+> **October 23, 2026 engineering update:** A private, mock-tested single-trophy API bridge and a new host-only read-only state-comparison module have been developed. The private review workflow passed for the comparison module. The native bridge has **not** been invoked successfully against a verified live trophy context, and no real trophy unlock is verified. Research identified that context ownership/registration must be validated before any write-capable build. No new public PKG or working unlocker is being claimed.
+
 ## Current progress
 
 | Feature | Evidence |
