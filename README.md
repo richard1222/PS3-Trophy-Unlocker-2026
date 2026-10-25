@@ -10,6 +10,8 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 Updated October 25, 2026.
 
+> **Now in development:** A controller-driven console interface for browsing games and trophies, filtering locked/earned trophies, reviewing a selection, and creating a backup. The UI build and its connection to the selected-trophy award path are still being validated. See the [UI development status](docs/UI-DEVELOPMENT-2026-10-25.md).
+
 > **Earlier October 25 milestone:** First-status cancellation passed on the owner's PS3 with unchanged trophy files. The later completed-registration result above has different preservation findings. See the [historical cancellation result](docs/HARDWARE-CANCELLATION-2026-10-25.md).
 
 ## Current progress
@@ -53,6 +55,8 @@ Earlier development notes remain in [releases/](releases/). They describe their 
 All public milestones remain development previews. The measured single-trophy result is not a general compatibility claim or a new end-user release.
 
 ## Roadmap
+
+The current focus is turning the measured prototype into a usable console interface. The first UI preview will provide browsing, review and backup controls; its unlock action will remain unavailable until the selectable award path is integrated and tested.
 
 1. Extend the verified single-trophy result with identity, recovery and interruption checks.
 2. Test identity, recovery, interrupted operations and untouched trophies.
