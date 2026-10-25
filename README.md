@@ -6,11 +6,11 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress (October 25, 2026):** v0.0.27 passed writable context and handle setup/cleanup on one real PS3. Installed-package identity and independent comparisons of all four trophy-data files passed. This extends the earlier v0.0.25 two-cycle read-only result. **Registration, actual unlocking and PSN synchronization remain unverified.** See the [hardware setup milestone](docs/WRITABLE-SETUP-HARDWARE-2026-10-25.md). Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
+> **Latest progress (October 25, 2026):** Trophy registration completed on the owner's PS3 and cleanup succeeded. The separate unchanged-data check failed: four trophy-related files changed, while all 49 decoded trophies remained locked. Original backups and stable before/after evidence are retained. **Actual unlocking and PSN synchronization remain unverified.** See the [registration result](docs/NATIVE-REGISTRATION-2026-10-25.md). Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
 Updated October 25, 2026.
 
-> **October 25, 2026 hardware update:** First-status registration cancellation is now verified on the real PS3, following emulator tests. Cleanup completed, installed-package identity matched, and all55 trophy files remained unchanged. Registration was canceled; completed registration and actual unlocking remain unverified. See the [hardware cancellation result](docs/HARDWARE-CANCELLATION-2026-10-25.md).
+> **Earlier October 25 milestone:** First-status cancellation passed on the owner's PS3 with unchanged trophy files. The later completed-registration result above has different preservation findings. See the [historical cancellation result](docs/HARDWARE-CANCELLATION-2026-10-25.md).
 
 ## Current progress
 
@@ -41,8 +41,8 @@ Earlier development notes remain in [releases/](releases/). They describe their 
 - **Proven:** v0.0.27 created and cleaned up a writable-capable context and handle on one PS3, with no retained resources. Installed payload and independent four-file comparisons passed.
 - **Proven:** v0.0.25 previously completed two read-only query/cleanup cycles, each returning49 trophies. The selected trophy remains locked in the unchanged record.
 - **Inference:** these app-owned paths support further registration research; context creation is not registration or unlock proof.
-- **Unknown:** retail registration, callback lifetime, actual unlocking, persistence after unlocking, PSN acceptance and HEN compatibility.
-- **Next:** build a separate guarded registration-only test with title-pack checks and independent backups.
+- **Unknown:** integrity of registration-related changes, general callback lifetime, actual unlocking, persistence after unlocking, PSN acceptance and HEN compatibility.
+- **Next:** validate trophy queries during a registered lifecycle while retaining the observed file-change evidence.
 
 All public milestones remain development previews. No working unlocker is released.
 
