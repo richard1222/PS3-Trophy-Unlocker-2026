@@ -6,7 +6,7 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress (October 25, 2026):** Registered trophy queries succeeded on the owner's PS3: the selected trophy was identified correctly, and all 49 trophies remained locked. Cleanup succeeded. The combined registration/query run changed three trophy-related files, so byte preservation did not pass. **Actual unlocking and PSN synchronization remain unverified.** See the [registered-query result](docs/REGISTERED-QUERY-2026-10-25.md). Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
+> **Latest progress (October 25, 2026):** One selected Persona 5 trophy unlocked on the owner's PS3. Native readbacks and two complete saved-file collections confirmed only that trophy earned; the other 48 decoded records were unchanged. **Restart persistence, PSN acceptance and HEN compatibility remain unverified.** See the [first native unlock result](docs/FIRST-NATIVE-UNLOCK-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md); no new installable release is announced.
 
 Updated October 25, 2026.
 
@@ -25,7 +25,8 @@ Updated October 25, 2026.
 | App-owned writable context setup/cleanup | v0.0.27 hardware report, installed payload and four-file comparison passed |
 | Guarded native trophy-state query | v0.0.25 two-cycle hardware report, installed payload and independent four-file comparison passed |
 | Registered-context trophy queries | Native selected-trophy details and 49-trophy flags passed; three-file preservation failure retained |
-| Unlock a selected trophy | In development; no verified unlock |
+| Unlock a selected trophy | One native Persona 5 award verified by API readbacks and independent saved-file parsing |
+| Unlock persistence | Immediate disk result stable across two collections; restart not tested |
 | Restore to a live trophy folder | Not implemented or tested |
 | PSN synchronization | Not implemented or verified |
 
@@ -43,14 +44,15 @@ Earlier development notes remain in [releases/](releases/). They describe their 
 - **Proven:** v0.0.25 previously completed two read-only query/cleanup cycles, each returning49 trophies. The selected trophy remains locked in the unchanged record.
 - **Proven:** registered-context queries identified the selected trophy and returned 49 locked trophies on the owner's PS3. Cleanup succeeded; three of 57 collected files changed.
 - **Inference:** the query result supports a bounded single-trophy hardware test; it does not prove unlocking or data integrity.
-- **Unknown:** integrity of registration-related changes, general callback lifetime, actual unlocking, persistence after unlocking, PSN acceptance and HEN compatibility.
-- **Next:** restore console connectivity, verify the retained backup against current data, then measure one selected-trophy operation and independently inspect the saved result. An emulator API result passed, but its saved native-format database failed validation; that failure remains open.
+- **Proven:** exactly one selected trophy unlocked, its timestamps were saved, and the other 48 decoded trophy records were unchanged in two complete collections. Cleanup and XMB return passed.
+- **Unknown:** independent protection-file integrity, general callback lifetime, restart persistence, PSN acceptance and HEN compatibility.
+- **Next:** confirm local Trophy Collection display and persistence after a normal restart. The completed test is disabled; no explicit synchronization was requested.
 
-All public milestones remain development previews. No working unlocker is released.
+All public milestones remain development previews. The measured single-trophy result is not a general compatibility claim or a new end-user release.
 
 ## Roadmap
 
-1. Validate a backend that handles exactly one selected trophy and reports its actual result.
+1. Extend the verified single-trophy result with identity, recovery and interruption checks.
 2. Test identity, recovery, interrupted operations and untouched trophies.
 3. Confirm local display and persistence on real hardware.
 4. Evaluate online-only trophies and PSN synchronization separately.
