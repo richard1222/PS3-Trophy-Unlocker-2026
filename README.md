@@ -6,11 +6,11 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress (October 25, 2026):** v0.0.25 passed two sequential native read-only trophy query and cleanup cycles on one real PS3. Installed-package identity was verified, and independent double reads of all four trophy-data files matched the baseline. The tested set contained49 trophies; the selected trophy remained locked. **Unlocking and PSN synchronization remain unverified.** See the [hardware milestone](docs/READONLY-TWO-CYCLE-HARDWARE-2026-10-25.md). Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
+> **Latest progress (October 25, 2026):** v0.0.27 passed writable context and handle setup/cleanup on one real PS3. Installed-package identity and independent comparisons of all four trophy-data files passed. This extends the earlier v0.0.25 two-cycle read-only result. **Registration, actual unlocking and PSN synchronization remain unverified.** See the [hardware setup milestone](docs/WRITABLE-SETUP-HARDWARE-2026-10-25.md). Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
 Updated October 25, 2026.
 
-> **October 25, 2026 engineering update:** The v0.0.25 report shows two matching read-only queries with successful file/user guards and clean resource cleanup. Independent installed-payload and four-file checks passed. This is a milestone for the read-only route; writable registration, trophy unlocking and PSN acceptance remain unverified.
+> **October 25, 2026 engineering update:** The writable setup report passed with successful guards and cleanup, no retained resources, and unchanged trophy files. This test performed no registration, trophy-state query or unlock. The next step is guarded registration and callback-lifetime validation.
 
 ## Current progress
 
@@ -22,6 +22,7 @@ Updated October 25, 2026.
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
 | Compare that scratch copy against backup and live originals | Follow-up interrupted by FTP timeouts; pending |
 | App-owned read-only context setup/cleanup | v0.0.22 hardware diagnostic passed on one PS3 (18 report fields) |
+| App-owned writable context setup/cleanup | v0.0.27 hardware report, installed payload and four-file comparison passed |
 | Guarded native trophy-state query | v0.0.25 two-cycle hardware report, installed payload and independent four-file comparison passed |
 | Unlock a selected trophy | In development; no verified unlock |
 | Restore to a live trophy folder | Not implemented or tested |
@@ -31,17 +32,17 @@ These are results for the tested console and trophy sets, not universal compatib
 
 ## Releases
 
-[v0.0.10 development progress](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.10-dev-preview-20261023) records the latest verified milestone. This public release contains a progress report and public source snapshot, with no installable PKG attached.
+[v0.0.10 development progress](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.10-dev-preview-20261023) records an earlier public development milestone. This public release contains a progress report and public source snapshot, with no installable PKG attached.
 
 Earlier development notes remain in [releases/](releases/). They describe their own point in development and may predate newer results.
 
 ## Development milestone (October 25, 2026)
 
-- **Proven:** v0.0.25 completed two sequential read-only query/cleanup cycles in one process on the tested PS3; each returned49 trophies and left no retained resources.
-- **Proven:** installed executable matched the verified package payload. All four independent trophy-data double reads matched the versioned baseline. The selected trophy remained locked.
-- **Inference:** the owned read-only route supports these consecutive cycles on this console. This is not universal repeatability.
-- **Unknown:** writable registration, safe borrowing of a running game's context, actual unlocking, persistence after unlocking, PSN acceptance and HEN compatibility.
-- **Next:** review a separate app-owned writable-context registration lifecycle, including callback handling and cleanup.
+- **Proven:** v0.0.27 created and cleaned up a writable-capable context and handle on one PS3, with no retained resources. Installed payload and independent four-file comparisons passed.
+- **Proven:** v0.0.25 previously completed two read-only query/cleanup cycles, each returning49 trophies. The selected trophy remains locked in the unchanged record.
+- **Inference:** these app-owned paths support further registration research; context creation is not registration or unlock proof.
+- **Unknown:** retail registration, callback lifetime, actual unlocking, persistence after unlocking, PSN acceptance and HEN compatibility.
+- **Next:** build a separate guarded registration-only test with title-pack checks and independent backups.
 
 All public milestones remain development previews. No working unlocker is released.
 
