@@ -10,7 +10,7 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 Updated October 25, 2026.
 
-> **October 25, 2026 engineering update:** Offline emulator testing detected file changes during trophy registration. That test is being held off real hardware while a path using the already installed trophy data is reviewed. The previous hardware setup result remains valid; actual unlocking and PSN synchronization remain unverified. See the [emulator validation update](docs/EMULATOR-VALIDATION-2026-10-25.md).
+> **October 25, 2026 engineering update:** The follow-up emulator check preserved all copied trophy files, but its queries were rejected because the context was not registered. A query-only comparison is staged for the owner's PS3 to establish native behavior. The earlier registration test remains held off hardware; actual unlocking and PSN synchronization remain unverified. See the [emulator validation update](docs/EMULATOR-VALIDATION-2026-10-25.md).
 
 ## Current progress
 
