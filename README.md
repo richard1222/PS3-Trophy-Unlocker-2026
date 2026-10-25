@@ -63,3 +63,10 @@ Initial target: **PS3 running Evilnat 4.93 CFW**. HEN, other firmware variants a
 Project creator: **Richard1222/Saber**.
 
 Research builds on publicly available PlayStation homebrew documentation and developer-maintained source. Existing contributor credits and licenses in the public source remain applicable.
+
+## License
+
+Original project code is licensed under the [MIT License](LICENSE), copyright
+2026 Richard (Richard1222/Saber). Third-party components retain their own
+terms; see [Third-party notices](THIRD_PARTY_NOTICES.md) and the full notices
+in [licenses/](licenses/).
