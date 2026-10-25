@@ -6,7 +6,7 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress (October 25, 2026):** One selected Persona 5 trophy unlocked on the owner's PS3. Native readbacks and two complete saved-file collections confirmed only that trophy earned; the other 48 decoded records were unchanged. **Restart persistence, PSN acceptance and HEN compatibility remain unverified.** See the [first native unlock result](docs/FIRST-NATIVE-UNLOCK-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md); no new installable release is announced.
+> **Latest progress (October 25, 2026):** The selected Persona 5 trophy remains unlocked after an owner-confirmed normal restart; all 57 captured files match the preserved post-error copy. Persona 5 loads normally while signed out. **PSN trophy synchronization failed with `80022D1E`; PSN acceptance is unverified.** See the [sync-error investigation](docs/PSN-SYNC-ERROR-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
 Updated October 25, 2026.
 
@@ -26,9 +26,9 @@ Updated October 25, 2026.
 | Guarded native trophy-state query | v0.0.25 two-cycle hardware report, installed payload and independent four-file comparison passed |
 | Registered-context trophy queries | Native selected-trophy details and 49-trophy flags passed; three-file preservation failure retained |
 | Unlock a selected trophy | One native Persona 5 award verified by API readbacks and independent saved-file parsing |
-| Unlock persistence | Immediate disk result stable across two collections; restart not tested |
+| Unlock persistence | Local award retained after an owner-confirmed normal restart; all 57 files match post-error backup |
 | Restore to a live trophy folder | Not implemented or tested |
-| PSN synchronization | Not implemented or verified |
+| PSN synchronization | Owner-triggered sync failed with 80022D1E; server acceptance unverified |
 
 These are results for the tested console and trophy sets, not universal compatibility claims.
 
@@ -45,8 +45,9 @@ Earlier development notes remain in [releases/](releases/). They describe their 
 - **Proven:** registered-context queries identified the selected trophy and returned 49 locked trophies on the owner's PS3. Cleanup succeeded; three of 57 collected files changed.
 - **Inference:** the query result supports a bounded single-trophy hardware test; it does not prove unlocking or data integrity.
 - **Proven:** exactly one selected trophy unlocked, its timestamps were saved, and the other 48 decoded trophy records were unchanged in two complete collections. Cleanup and XMB return passed.
-- **Unknown:** independent protection-file integrity, general callback lifetime, restart persistence, PSN acceptance and HEN compatibility.
-- **Next:** confirm local Trophy Collection display and persistence after a normal restart. The completed test is disabled; no explicit synchronization was requested.
+- **Proven:** the local award survived an owner-confirmed normal restart. Persona 5 loads normally while signed out.
+- **Unknown:** sync-error cause, independent protection-file integrity, general callback lifetime, PSN acceptance and HEN compatibility.
+- **Next:** investigate the owner-reported synchronization error while retaining all backups. The completed award test remains disabled.
 
 All public milestones remain development previews. The measured single-trophy result is not a general compatibility claim or a new end-user release.
 
