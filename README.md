@@ -6,11 +6,11 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress (October 25, 2026):** Private development has reached **v0.0.23** with guarded, read-only native trophy-state diagnostics. A **v0.0.22 setup-only diagnostic passed on one real PS3** (18 verified report fields). The v0.0.23 package has been staged for an owner-run hardware query, but **that query has not yet been verified on hardware**. No working trophy unlocker or PSN sync is released. Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
+> **Latest progress (October 25, 2026):** v0.0.24 completed an owner-run native read-only trophy-state query on a real PS3. Its report passed verification, and independent copies of all four trophy-data files matched the documented baseline. The tested set contained 49 trophies; the selected trophy remained locked. **Trophy unlocking and PSN synchronization remain unverified.** Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
 Updated October 25, 2026.
 
-> **October 25, 2026 engineering update:** Separate app-owned trophy-context setup and cleanup have been verified through a read-only hardware diagnostic. Offline tests of the subsequent guarded state query have passed, and a private package is staged for hardware verification. These tests do **not** establish safe write-capable registration, real trophy unlocking, or PSN acceptance. The separate Persona 5 game-owned context lifetime and queue exclusion remain unresolved. No private samples, logs, proprietary data, or unverified PKGs are published.
+> **October 25, 2026 engineering update:** The v0.0.24 report shows a successful native read-only query, successful file/user guards, clean resource cleanup, and no retained context, handle or runtime. Separate file comparisons support the result. Installed-package identity could not be independently checked afterward because the diagnostic app was unavailable. See the [milestone notes](docs/READONLY-QUERY-MILESTONE-2026-10-25.md) for evidence limits and the next test.
 
 ## Current progress
 
@@ -22,7 +22,7 @@ Updated October 25, 2026.
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
 | Compare that scratch copy against backup and live originals | Follow-up interrupted by FTP timeouts; pending |
 | App-owned read-only context setup/cleanup | v0.0.22 hardware diagnostic passed on one PS3 (18 report fields) |
-| Guarded native trophy-state query | v0.0.23 offline tested; owner hardware test pending |
+| Guarded native trophy-state query | v0.0.24 owner hardware report verified; independent four-file comparison passed |
 | Unlock a selected trophy | In development; no verified unlock |
 | Restore to a live trophy folder | Not implemented or tested |
 | PSN synchronization | Not implemented or verified |
@@ -37,11 +37,13 @@ Earlier development notes remain in [releases/](releases/). They describe their 
 
 ## Development milestone (October 25, 2026)
 
-- Private v0.0.23 source passed both reported CI workflows (512 tests, with a Windows startup-probe test class skipped).
-- v0.0.22's setup-only operation was verified on the targeted PS3. The v0.0.23 trophy-state query is **not yet hardware verified**.
-- Persona 5's local trophy record was observed in a locked state during bounded read-only checks. This does not identify the active PSN user or prove synchronization.
-- Native context ownership and safe request exclusion are still research blockers for write-capable operations.
-- All public milestones remain development previews, not a functioning unlocker.
+- **Proven:** v0.0.24's owner-supplied hardware report passed verification: one native query, 49 trophies, successful cleanup, and the selected trophy still locked.
+- **Proven:** independent double reads of all four trophy-data files matched the versioned baseline. Three workflows passed on the associated development commit; 29 focused checks passed locally.
+- **Inference:** the app-owned read-only route can support further lifecycle testing. One successful run does not establish repeatability or write-capable behavior.
+- **Unknown:** installed-package identity after the test, safe write-capable context ownership, trophy unlocking, persistence after unlocking, PSN acceptance, and HEN compatibility.
+- **Next:** test two sequential read-only lifecycle cycles with file/user checks between them and explicit package identity verification.
+
+All public milestones remain development previews. No working unlocker is released.
 
 ## Roadmap
 
