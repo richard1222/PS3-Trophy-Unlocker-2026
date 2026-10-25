@@ -6,7 +6,7 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress (October 25, 2026):** The selected Persona 5 trophy remains unlocked after an owner-confirmed normal restart; all 57 captured files match the preserved post-error copy. Persona 5 loads normally while signed out. **PSN trophy synchronization failed with `80022D1E`; PSN acceptance is unverified.** See the [sync-error investigation](docs/PSN-SYNC-ERROR-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
+> **Latest progress (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
 Updated October 25, 2026.
 
@@ -28,7 +28,7 @@ Updated October 25, 2026.
 | Unlock a selected trophy | One native Persona 5 award verified by API readbacks and independent saved-file parsing |
 | Unlock persistence | Local award retained after an owner-confirmed normal restart; all 57 files match post-error backup |
 | Restore to a live trophy folder | Not implemented or tested |
-| PSN synchronization | Owner-triggered sync failed with 80022D1E; server acceptance unverified |
+| PSN synchronization | Owner confirmed successful sync and PSN visibility for one Persona 5 trophy after an earlier error |
 
 These are results for the tested console and trophy sets, not universal compatibility claims.
 
@@ -46,8 +46,9 @@ Earlier development notes remain in [releases/](releases/). They describe their 
 - **Inference:** the query result supports a bounded single-trophy hardware test; it does not prove unlocking or data integrity.
 - **Proven:** exactly one selected trophy unlocked, its timestamps were saved, and the other 48 decoded trophy records were unchanged in two complete collections. Cleanup and XMB return passed.
 - **Proven:** the local award survived an owner-confirmed normal restart. Persona 5 loads normally while signed out.
-- **Unknown:** sync-error cause, independent protection-file integrity, general callback lifetime, PSN acceptance and HEN compatibility.
-- **Next:** investigate the owner-reported synchronization error while retaining all backups. The completed award test remains disabled.
+- **Owner-confirmed:** successful synchronization and PSN visibility for the selected Persona 5 trophy. No independent PSN profile readback was captured.
+- **Unknown:** exact sync-error cause, independent protection-file integrity, general callback lifetime, broader PSN compatibility and HEN runtime compatibility.
+- **Next:** retain the successful result and earlier failure, then plan a separate bounded validation case. The completed award test remains disabled.
 
 All public milestones remain development previews. The measured single-trophy result is not a general compatibility claim or a new end-user release.
 
@@ -58,7 +59,7 @@ All public milestones remain development previews. The measured single-trophy re
 3. Confirm local display and persistence on real hardware.
 4. Evaluate online-only trophies and PSN synchronization separately.
 
-A local state change alone will not be presented as proof of PSN acceptance.
+A local state change alone is not proof of PSN acceptance. This milestone includes the owner's explicit confirmation of synchronization and PSN visibility for one trophy.
 
 ## Compatibility
 
