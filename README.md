@@ -6,11 +6,11 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Latest progress:** [v0.0.10 development update](releases/v0.0.10/README.md). Browsing, backup creation and a scratch recovery test have console evidence. **A working trophy unlocker is not released.**
+> **Latest progress (October 25, 2026):** Private development has reached **v0.0.23** with guarded, read-only native trophy-state diagnostics. A **v0.0.22 setup-only diagnostic passed on one real PS3** (18 verified report fields). The v0.0.23 package has been staged for an owner-run hardware query, but **that query has not yet been verified on hardware**. No working trophy unlocker or PSN sync is released. Public release status remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
-Updated October 23, 2026.
+Updated October 25, 2026.
 
-> **October 23, 2026 engineering update:** A private, mock-tested single-trophy API bridge and a new host-only read-only state-comparison module have been developed. The private review workflow passed for the comparison module. The native bridge has **not** been invoked successfully against a verified live trophy context, and no real trophy unlock is verified. Research identified that context ownership/registration must be validated before any write-capable build. No new public PKG or working unlocker is being claimed.
+> **October 25, 2026 engineering update:** Separate app-owned trophy-context setup and cleanup have been verified through a read-only hardware diagnostic. Offline tests of the subsequent guarded state query have passed, and a private package is staged for hardware verification. These tests do **not** establish safe write-capable registration, real trophy unlocking, or PSN acceptance. The separate Persona 5 game-owned context lifetime and queue exclusion remain unresolved. No private samples, logs, proprietary data, or unverified PKGs are published.
 
 ## Current progress
 
@@ -21,6 +21,8 @@ Updated October 23, 2026.
 | Backup persistence | One owner-reported normal restart followed by successful integrity checks |
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
 | Compare that scratch copy against backup and live originals | Follow-up interrupted by FTP timeouts; pending |
+| App-owned read-only context setup/cleanup | v0.0.22 hardware diagnostic passed on one PS3 (18 report fields) |
+| Guarded native trophy-state query | v0.0.23 offline tested; owner hardware test pending |
 | Unlock a selected trophy | In development; no verified unlock |
 | Restore to a live trophy folder | Not implemented or tested |
 | PSN synchronization | Not implemented or verified |
@@ -32,6 +34,14 @@ These are results for the tested console and trophy sets, not universal compatib
 [v0.0.10 development progress](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.10-dev-preview-20261023) records the latest verified milestone. This public release contains a progress report and public source snapshot, with no installable PKG attached.
 
 Earlier development notes remain in [releases/](releases/). They describe their own point in development and may predate newer results.
+
+## Development milestone (October 25, 2026)
+
+- Private v0.0.23 source passed both reported CI workflows (512 tests, with a Windows startup-probe test class skipped).
+- v0.0.22's setup-only operation was verified on the targeted PS3. The v0.0.23 trophy-state query is **not yet hardware verified**.
+- Persona 5's local trophy record was observed in a locked state during bounded read-only checks. This does not identify the active PSN user or prove synchronization.
+- Native context ownership and safe request exclusion are still research blockers for write-capable operations.
+- All public milestones remain development previews, not a functioning unlocker.
 
 ## Roadmap
 
