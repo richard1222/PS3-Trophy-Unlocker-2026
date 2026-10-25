@@ -10,7 +10,7 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 Updated October 25, 2026.
 
-> **October 25, 2026 engineering update:** The follow-up emulator check preserved all copied trophy files, but its queries were rejected because the context was not registered. A query-only comparison is staged for the owner's PS3 to establish native behavior. The earlier registration test remains held off hardware; actual unlocking and PSN synchronization remain unverified. See the [emulator validation update](docs/EMULATOR-VALIDATION-2026-10-25.md).
+> **October 25, 2026 hardware update:** The real PS3 returned the same “context not registered” result for both queries. Cleanup completed, installed-package identity matched, and all55 trophy files remained unchanged. This is a measured query rejection, not successful unlocking. Controlled registration testing is next. See the [hardware query result](docs/HARDWARE-QUERY-RESULT-2026-10-25.md).
 
 ## Current progress
 

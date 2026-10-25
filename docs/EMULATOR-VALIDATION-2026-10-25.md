@@ -8,4 +8,6 @@ This result is being held off real hardware. The real PS3 was accessed only to r
 
 **Follow-up proven in the emulator:** the existing-set query check completed cleanup and left all55 copied trophy files unchanged. Both queries returned “context not registered”; this is a measured rejection, not query success. A changed protected file was rejected before any trophy API.
 
-**Next:** a query-only comparison is staged on the owner's PS3 to establish native behavior, with a fresh verified backup. It has not been installed or run on hardware yet. The earlier [hardware setup milestone](WRITABLE-SETUP-HARDWARE-2026-10-25.md) remains the latest verified console result. Registration, actual unlocking and PSN acceptance remain unverified. Public release remains the [v0.0.10 development preview](../releases/v0.0.10/README.md).
+**Hardware follow-up:** the owner completed the query-only comparison. Both native queries returned “context not registered,” with cleanup complete and all55 trophy files unchanged. Installed-package identity was independently verified. See the [hardware query result](HARDWARE-QUERY-RESULT-2026-10-25.md).
+
+**Next:** controlled registration-status and cancellation testing, starting offline. The earlier [hardware setup milestone](WRITABLE-SETUP-HARDWARE-2026-10-25.md) remains valid. Registration, actual unlocking and PSN acceptance remain unverified. Public release remains the [v0.0.10 development preview](../releases/v0.0.10/README.md).
