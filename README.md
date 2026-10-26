@@ -1,3 +1,5 @@
+> **Artwork/build status (October 26, 2026):** A custom platinum-trophy `ICON0.PNG` and blue-wave `PIC1.PNG` have been approved and staged in the owner's local project folder. The private development repository contains a checksum-gated GitHub Actions workflow intended to build a v0.0.41 PKG after those binary images are uploaded. **The customized PKG has not been rebuilt or released, and CI success for this artwork workflow is unverified.** This public repository is documenting progress only; existing releases are unchanged.
+
 ![Platform](https://img.shields.io/badge/Platform-PlayStation_3-blue)
 ![Target](https://img.shields.io/badge/Target-Evilnat_4.93_CFW-orange)
 ![Status](https://img.shields.io/badge/Status-In_Development-yellow)
