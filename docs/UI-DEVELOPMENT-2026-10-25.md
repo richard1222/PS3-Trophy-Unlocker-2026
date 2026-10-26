@@ -28,11 +28,11 @@ The font and icons were replaced for the XMB-inspired appearance. The font is Op
 
 The owner confirmed the menu displays and controller navigation work correctly on their PS3. The app report also records startup, trophy browsing, review and return to the XMB. This is one console check, not broad compatibility verification.
 
-Backup through this screen remains under investigation: the owner reported success, while the run's report recorded no backup action. A specific confirmation-prompt retest is pending.
+A second real-console run recorded backup start, verified completion and return to the XMB. The initial run contained no backup action despite the owner's initial success report; that discrepancy prompted an explicit confirmation retest. Backup restoration and independent inspection of its contents have not been tested.
 
 ## Still in development
 
-The UI's unlock action remains unavailable until its selectable-award integration is validated. Backup execution through the new screen, HEN runtime and frame-rate performance are not yet verified. The wave background is static; unsupported text characters use a fallback glyph.
+The UI's unlock action remains unavailable until its selectable-award integration is validated. Backup restoration, HEN runtime and frame-rate performance are not yet verified. The wave background is static; unsupported text characters use a fallback glyph.
 
 The separately measured native trophy award, restart persistence and owner-confirmed PSN visibility remain documented in the [PSN milestone](OWNER-CONFIRMED-PSN-2026-10-25.md). No new general end-user UI release is announced.
 
