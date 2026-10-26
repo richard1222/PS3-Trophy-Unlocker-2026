@@ -8,13 +8,13 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Development update (October 26, 2026):** A selected-game Unlock All development build passed an authored offline emulator test, including automatic platinum, preservation of an earned trophy and independent backup checks. Its real-console test stopped during pre-award state validation with zero award calls; no bulk hardware or PSN success is claimed. More specific diagnostics are being built. A separately labeled HEN test package is planned after this issue is resolved; HEN compatibility remains unverified. No new public package has been released.
+> **Local Unlock All milestone (October 26, 2026):** The v0.0.45 development UI completed Persona 5’s remaining 48 trophies on the owner’s PS3, including automatic platinum. Independent, identical repeat reads of the saved files confirm **49/49 earned**, unchanged trophy metadata and preservation of the previously earned trophy. The final console report records successful completion and clean cleanup. **PSN synchronization of this full batch is not yet tested.** See the [local bulk verification](docs/PERSONA5-LOCAL-BULK-2026-10-26.md). A separately labeled HEN test package has passed package and disconnected emulator-startup checks; real HEN compatibility remains unverified. **CFW and HEN test packages:** [Saber PSN Unlock Tool v0.0.45 prerelease](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). XMB titles are **Saber PSN Unlock Tool** and **Saber PSN Unlock Tool HEN**. Game-specific setup is required; the packages do not include it.
 
-> **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
+> **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). The earlier public preview was [v0.0.10](releases/v0.0.10/README.md); current CFW/HEN downloads are linked above.
 
 Updated October 26, 2026.
 
-> **XMB-style UI progress (October 25, 2026):** The owner confirmed menu display/navigation on PS3, and the backup retest recorded verified completion. v0.0.37 adds **Check selection**: an earned trophy was rejected and a locked trophy produced a plan, with both paths recorded in the console report. Menu-based unlocking remains disconnected. See the [selection-check preview](docs/UI-SELECTION-V037-2026-10-25.md).
+> **XMB-style UI progress (October 25, 2026):** The owner confirmed menu display/navigation on PS3, and the backup retest recorded verified completion. v0.0.37 adds **Check selection**: an earned trophy was rejected and a locked trophy produced a plan, with both paths recorded in the console report. That historical v0.0.37 selection-check build had unlocking disconnected; the current development build’s local batch result is described above. See the [selection-check preview](docs/UI-SELECTION-V037-2026-10-25.md).
 
 ![Trophy list UI preview using authored example data](docs/assets/ui-v036/trophies.png)
 
@@ -26,7 +26,7 @@ Updated October 26, 2026.
 | --- | --- |
 | Browse trophy sets and individual trophies | Tested on one PS3 |
 | Menu-based selected unlock flow | Connected in the development UI; broader real-console validation pending |
-| Unlock all remaining trophies in one game | Authored emulator batch passed; first confirmed hardware attempt stopped during state validation before any award |
+| Unlock all remaining trophies in one game | Persona 5 completed on one owner PS3: 48 new /49 total earned including platinum; saved files independently verified; full-batch PSN sync pending |
 | Create a complete-set backup | Console result and file-integrity checks passed |
 | Backup persistence | One owner-reported normal restart followed by successful integrity checks |
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
