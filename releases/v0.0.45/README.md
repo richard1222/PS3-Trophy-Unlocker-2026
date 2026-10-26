@@ -20,7 +20,7 @@ The ZIP contains both packages and instructions. Check PKG hashes against SHA256
 
 ### Read before testing
 
-This is a development prerelease. **Game-specific setup is required and is not included.** No game packs, session credentials or account data are distributed. Without valid setup, the app can browse/back up supported data but will report that unlocking is not set up; installing this PKG does not enable every game automatically.
+This is a development release. **Game-specific setup is required and is not included.** No game packs, session credentials or account data are distributed. Without valid setup, the app can browse/back up supported data but will report that unlocking is not set up; installing this PKG does not enable every game automatically.
 
 **Full-batch PSN sync remains untested.** The application name is not a guarantee of PSN acceptance. Other games, firmware variants and HEN unlocking remain unverified. First HEN tests should cover startup, browsing, controller navigation and Start exit.
 

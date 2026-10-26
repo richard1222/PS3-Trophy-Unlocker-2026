@@ -25,4 +25,4 @@ The local comparison also confirmed unchanged game/trophy metadata, preserved de
 
 ## Next
 
-Preserve the backups and let the owner test Sync with Server manually. Record the exact outcome separately. HEN package startup in a disconnected emulator is not proof of real HEN unlocking. A separately labeled CFW/HEN development prerelease is available as Saber PSN Unlock Tool v0.0.45. See its release notes for setup requirements and limitations.
+Preserve the backups and let the owner test Sync with Server manually. Record the exact outcome separately. HEN package startup in a disconnected emulator is not proof of real HEN unlocking. A separately labeled CFW/HEN development release is available as Saber PSN Unlock Tool v0.0.45. See its release notes for setup requirements and limitations.
