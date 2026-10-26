@@ -24,9 +24,15 @@ The actual packaged executable reached UI-ready during a bounded, disconnected e
 
 The font and icons were replaced for the XMB-inspired appearance. The font is Open Sans under the [SIL Open Font License](../licenses/OpenSans-OFL.txt); icons and waves are original artwork. No Sony font or artwork is bundled.
 
+## Real-console check
+
+The owner confirmed the menu displays and controller navigation work correctly on their PS3. The app report also records startup, trophy browsing, review and return to the XMB. This is one console check, not broad compatibility verification.
+
+Backup through this screen remains under investigation: the owner reported success, while the run's report recorded no backup action. A specific confirmation-prompt retest is pending.
+
 ## Still in development
 
-The UI's unlock action remains unavailable until its selectable-award integration is validated. Real-console display/controller behavior, backup execution through the new screen, HEN runtime and frame-rate performance are not yet verified. The wave background is static; unsupported text characters use a fallback glyph.
+The UI's unlock action remains unavailable until its selectable-award integration is validated. Backup execution through the new screen, HEN runtime and frame-rate performance are not yet verified. The wave background is static; unsupported text characters use a fallback glyph.
 
 The separately measured native trophy award, restart persistence and owner-confirmed PSN visibility remain documented in the [PSN milestone](OWNER-CONFIRMED-PSN-2026-10-25.md). No new general end-user UI release is announced.
 
