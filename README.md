@@ -1,4 +1,4 @@
-> **Artwork/build status (October 26, 2026):** The approved XMB icon and background are now included in the rebuilt development PKG. The artwork build passed, and extraction of the final package confirmed both images match the approved files exactly. Installation and appearance on a real PS3 remain untested. Existing public releases are unchanged.
+> **Artwork/build status (October 26, 2026):** The approved icon and background are embedded in the rebuilt development PKG. The installed app and artwork files now match the extracted package in console readback checks. Actual appearance is a separate visual check. Existing public releases are unchanged.
 
 ![Platform](https://img.shields.io/badge/Platform-PlayStation_3-blue)
 ![Target](https://img.shields.io/badge/Target-Evilnat_4.93_CFW-orange)
@@ -8,7 +8,7 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Development update (October 26, 2026):** The XMB-style interface now connects game setup to a fresh trophy review with explicit confirmation and cancellation. The development package builds and reaches its library screen in an offline emulator startup test, with unchanged trophy files during startup. The full review reports **852 passes and one explicit skip**. Controller and real-console testing of this UI, plus per-game setup, remain pending; no new public package has been released.
+> **Development update (October 26, 2026):** A selected-game Unlock All development build passed an authored offline emulator test, including automatic platinum, preservation of an earned trophy and independent backup checks. Its real-console test stopped during pre-award state validation with zero award calls; no bulk hardware or PSN success is claimed. More specific diagnostics are being built. A separately labeled HEN test package is planned after this issue is resolved; HEN compatibility remains unverified. No new public package has been released.
 
 > **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
@@ -25,7 +25,8 @@ Updated October 26, 2026.
 | Feature | Evidence |
 | --- | --- |
 | Browse trophy sets and individual trophies | Tested on one PS3 |
-| Menu-based selected unlock flow | Connected in the new development UI; controller and real-console validation pending |
+| Menu-based selected unlock flow | Connected in the development UI; broader real-console validation pending |
+| Unlock all remaining trophies in one game | Authored emulator batch passed; first confirmed hardware attempt stopped during state validation before any award |
 | Create a complete-set backup | Console result and file-integrity checks passed |
 | Backup persistence | One owner-reported normal restart followed by successful integrity checks |
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
