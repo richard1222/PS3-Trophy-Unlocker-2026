@@ -10,7 +10,7 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 Updated October 25, 2026.
 
-> **XMB-style UI preview (October 25, 2026):** The console interface now uses a horizontal icon bar, a centered vertical selection, a blue wave background, and softer white text. Left/Right navigates between screens; L1/R1 pages lists. Build, authored-screen checks and emulated startup passed. Real-console UI controls and selectable unlocking remain unverified. See the [preview](docs/UI-DEVELOPMENT-2026-10-25.md).
+> **XMB-style UI progress (October 25, 2026):** The owner confirmed menu display/navigation on PS3, and the backup retest recorded verified completion. v0.0.37 adds **Check selection**: an earned trophy was rejected and a locked trophy produced a plan, with both paths recorded in the console report. Menu-based unlocking remains disconnected. See the [selection-check preview](docs/UI-SELECTION-V037-2026-10-25.md).
 
 ![Trophy list UI preview using authored example data](docs/assets/ui-v036/trophies.png)
 
