@@ -6,7 +6,7 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Development update (October 26, 2026):** The registration/session layer now builds and passes 49 simulated session cases; the full review reports 844 passes and one explicit skip. An actual offline emulator test completed registration, then blocked the award because registration changed required files. That run did not unlock a trophy. Integration into the console menu remains in development, and no new console package has been released.
+> **Development update (October 26, 2026):** The new registration-and-review flow passed an offline emulator test using independently authored dummy trophies: one selected award was saved and cleanup completed. The full review reports **851 passes and one explicit skip**; session checks cover **68 simulated cases**. Controller-menu integration and broader real-game compatibility remain in development. This result is not a new retail or PSN test, and no new console package has been released.
 
 > **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
