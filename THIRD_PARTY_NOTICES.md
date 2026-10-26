@@ -30,3 +30,7 @@ by themselves grant rights to copy its code.
 Game content, firmware, account data, and other third-party assets are not
 licensed by the project's MIT License. Third-party names are attribution, not
 endorsement.
+
+## Open Sans UI text
+
+UI preview text is derived from Open Sans, copyright 2020 The Open Sans Project Authors, under the SIL Open Font License 1.1. See [licenses/OpenSans-OFL.txt](licenses/OpenSans-OFL.txt). Font data is separately licensed from the project's MIT code. No Sony XMB font or artwork is bundled.

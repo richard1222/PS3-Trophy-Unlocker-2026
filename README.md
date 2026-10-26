@@ -10,9 +10,9 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 Updated October 25, 2026.
 
-> **UI preview (October 25, 2026):** The controller-driven interface now compiles and its game list, trophy filters, review and result screens have been checked with authored example data. Emulated startup/discovery passed; real-console UI controls and selectable unlocking remain unverified. See the [UI preview and screenshots](docs/UI-DEVELOPMENT-2026-10-25.md).
+> **XMB-style UI preview (October 25, 2026):** The console interface now uses a horizontal icon bar, a centered vertical selection, a blue wave background, and softer white text. Left/Right navigates between screens; L1/R1 pages lists. Build, authored-screen checks and emulated startup passed. Real-console UI controls and selectable unlocking remain unverified. See the [preview](docs/UI-DEVELOPMENT-2026-10-25.md).
 
-![Trophy list UI preview using authored example data](docs/assets/ui-v035/trophies.png)
+![Trophy list UI preview using authored example data](docs/assets/ui-v036/trophies.png)
 
 > **Earlier October 25 milestone:** First-status cancellation passed on the owner's PS3 with unchanged trophy files. The later completed-registration result above has different preservation findings. See the [historical cancellation result](docs/HARDWARE-CANCELLATION-2026-10-25.md).
 
