@@ -6,7 +6,7 @@
 
 A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
 
-> **Development update (October 26, 2026):** The new registration-and-review flow passed an offline emulator test using independently authored dummy trophies: one selected award was saved and cleanup completed. The full review reports **851 passes and one explicit skip**; session checks cover **68 simulated cases**. Controller-menu integration and broader real-game compatibility remain in development. This result is not a new retail or PSN test, and no new console package has been released.
+> **Development update (October 26, 2026):** The XMB-style interface now connects game setup to a fresh trophy review with explicit confirmation and cancellation. The development package builds and reaches its library screen in an offline emulator startup test, with unchanged trophy files during startup. The full review reports **852 passes and one explicit skip**. Controller and real-console testing of this UI, plus per-game setup, remain pending; no new public package has been released.
 
 > **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). Public release remains [v0.0.10 development preview](releases/v0.0.10/README.md).
 
@@ -23,6 +23,7 @@ Updated October 26, 2026.
 | Feature | Evidence |
 | --- | --- |
 | Browse trophy sets and individual trophies | Tested on one PS3 |
+| Menu-based selected unlock flow | Connected in the new development UI; controller and real-console validation pending |
 | Create a complete-set backup | Console result and file-integrity checks passed |
 | Backup persistence | One owner-reported normal restart followed by successful integrity checks |
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
@@ -60,7 +61,7 @@ All public milestones remain development previews. The measured single-trophy re
 
 ## Roadmap
 
-The current focus is turning the measured prototype into a usable console interface. The first UI preview will provide browsing, review and backup controls; its unlock action will remain unavailable until the selectable award path is integrated and tested.
+The current focus is validating the new console interface and completing per-game setup. Browsing, review and backup controls have earlier console results; the new selected-award integration now needs controller and real-console testing.
 
 1. Extend the verified single-trophy result with identity, recovery and interruption checks.
 2. Test identity, recovery, interrupted operations and untouched trophies.
