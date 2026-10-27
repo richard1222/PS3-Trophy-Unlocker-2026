@@ -1,3 +1,9 @@
+## Read-only hardware follow-up
+
+The separate read-only diagnostic also stalled after Square on the owner's console. Its live report was retrieved successfully and stops before the first saved-file read marker. This narrows that diagnostic's failure to initial screen presentation, system callbacks, active-profile lookup or reporting; it does not establish which operation failed or explain the original v0.0.51 issue.
+
+A second read-only diagnostic separates those phases. Its authored completed-game test and final-package startup checks passed in disconnected emulation, with no trophy API calls or saved-file changes. It is staged for an owner-controlled console test; that result is pending. The original freeze remains unresolved, and no fixed unlocker release or new PSN result is claimed.
+
 # v0.0.51 Square freeze — current status
 
 October 27, 2026. Development target: Evilnat 4.93 CFW.
