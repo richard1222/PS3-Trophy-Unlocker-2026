@@ -1,3 +1,5 @@
+> **App/package update (October 27, 2026):** Global confirmation and game-to-game launch controls are connected in development source. Local v0.0.51 CFW/HEN package candidates passed extraction and disconnected emulator startup checks. The verified review screen is shown in [current progress](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md). **Full controller-flow and hardware validation remain pending; the public download is still v0.0.45.**
+
 > **Unlock All development update (October 27, 2026):** The award stage passed a disconnected emulator test across **two authored trophy sets in four guest launches**: three regular trophies plus automatic platinum per game, with existing earned progress preserved and saved results verified. **Unlocking across every game in one operation is still under development.** Current downloads remain [CFW/HEN v0.0.45](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). See [current progress and remaining work](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md).
 
 > **Artwork/build status (October 26, 2026):** The approved icon and background are embedded in the rebuilt development PKG. The installed app and artwork files now match the extracted package in console readback checks. Actual appearance is a separate visual check. Existing public releases are unchanged.
@@ -31,7 +33,7 @@ Updated October 27, 2026.
 | Browse trophy sets and individual trophies | Tested on one PS3 |
 | Menu-based selected unlock flow | Connected in the development UI; broader real-console validation pending |
 | Unlock all remaining trophies in one game | Persona 5: 49/49 locally verified; full-batch PSN sync pending. Additional digital title: 34/34 locally verified and owner-confirmed manual PSN sync. |
-| Unlock trophies across every game in one operation | In development. Award stage and saved-result records passed authored emulator checks; multi-game orchestration and end-to-end validation remain pending. |
+| Unlock trophies across every game in one operation | App controls connected in development source. Two-game native sequence and fresh review screen passed in the emulator; full controller/hardware validation pending. |
 | Create a complete-set backup | Console result and file-integrity checks passed |
 | Backup persistence | One owner-reported normal restart followed by successful integrity checks |
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
@@ -73,9 +75,9 @@ All public milestones remain development previews. The measured single-trophy re
 
 The current goal is **one operation across every game in the profile**, including registered digital and disc titles. This is not finished yet.
 
-1. Complete the multi-game award worker and verify the full library between games.
+1. Validate controller input and the final dialog around the connected all-games flow.
 2. Test cancellation, changed files and interrupted saves without repeating uncertain awards.
-3. Connect the final confirmation and validate the complete flow in the app.
+3. Finish installed-app preservation and validate the complete flow on a bounded console test.
 4. Validate separately on real CFW and HEN hardware before a new release.
 
 Local saved results and PSN synchronization are separate checks. The existing owner-confirmed PSN milestones remain limited to the tests described above.

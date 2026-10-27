@@ -10,7 +10,7 @@ The award stage now passes a disconnected emulator test, including verification 
 - The second game's worker checked the first game's recorded saved result before starting.
 - The existing full host suite collected 926 tests: **925 passed, one skipped, no failures**. It was not rerun for the diagnostic-only additions.
 
-This proves the native multi-game backend sequence for two synthetic fixtures in a disconnected emulator. **The complete app flow remains unconnected and unverified.** A diagnostic-only marker substituted for the owner's global confirmation; the production global review, final confirmation and launch controls still need integration.
+This proves the native multi-game backend sequence for two synthetic fixtures in a disconnected emulator. **Global review, final confirmation and launch controls are now connected in development source. Full controller/dialog/award interaction remains unverified.** The native control-API test used an authored-only consent marker; it does not prove physical button interaction.
 
 The fixture results do not establish support for every retail game, real HEN hardware or PSN acceptance. This was a headless test; no new app screenshot or controller-navigation result is claimed.
 
@@ -20,9 +20,19 @@ The fixture results do not establish support for every retail game, real HEN har
 - Additional digital PS3 title: **34/34 locally earned**, independently verified; the owner confirmed successful manual PSN synchronization.
 - Earlier Persona 5 selected-trophy test: the owner confirmed “Merciless Executioner” appeared on PSN after an earlier sync error.
 
+## Package candidates and app review
+
+Local **v0.0.51 CFW and HEN candidates** are built. Both passed actual final-package extraction, identity/artwork/notice checks and disconnected emulator startup with unchanged test trophy files and no trophy API calls. HEN has its own XMB title and storage ID. These candidates are **not published or installed**, and real HEN testing remains pending.
+
+The actual app displayed a freshly verified review for two prepared games and eight remaining trophies without awarding anything. This is an exported software frame from an authored smoke test. The controller-connected label was simulated for the illustration; physical input and GPU appearance are not proved.
+
+![Authored app global review software frame](assets/global-review-20261027.png)
+
+The app rechecks the complete displayed review after explicit consent, preserves verified backups/results, stops on uncertain work and does not automatically retry or sync to PSN. These safeguards are not a brick-proof or zero-risk guarantee.
+
 ## What remains
 
-The next work is connecting independently revalidated global review, final confirmation and deliberate game-to-game relaunches in the app, then testing controller input, cancellation and recovery. A complete multi-game test is required before a new package release. Registered digital and disc titles are within the goal; universal game compatibility has not been demonstrated.
+The next work is testing controller input, the actual final dialog, cancellation and ordinary-launch recovery around the connected app flow, then completing preservation before a bounded real-console test. A complete multi-game test is required before a new package release. Registered digital and disc titles are within the goal; universal game compatibility has not been demonstrated.
 
 There is no reliable completion date yet. The goal remains **Unlock All across every game in one operation**, rather than requiring a separate operation for each game.
 
