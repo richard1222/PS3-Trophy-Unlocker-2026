@@ -7,7 +7,9 @@ The award stage now passes a disconnected emulator test, including verification 
 - A first emulator process prepared an authored five-trophy set without awarding anything.
 - A second process awarded the three remaining regular trophies, automatically earned its platinum, and preserved the already-earned trophy.
 - The saved result was independently checked, recorded, reread and verified before the test job was marked complete.
-- The full host test suite collected 925 tests: **924 passed, one skipped, no failures**. Focused memory/undefined-behavior checks also passed.
+- The full host test suite collected 926 tests: **925 passed, one skipped, no failures**. Focused memory/undefined-behavior checks also passed.
+
+The multi-game award worker is now implemented and has passed the actual native emulator path for one authored game. Host tests additionally cover two pending games and an already-complete game, including cancellation, changed files and interrupted persistence. A native multi-game sequence and the complete app flow remain unverified.
 
 These results use a synthetic set in a disposable, disconnected emulator profile. They do not establish support for every game, real HEN hardware or PSN acceptance. This was a headless test; no new in-app screenshot or controller-navigation result is claimed.
 
@@ -19,7 +21,7 @@ These results use a synthetic set in a disposable, disconnected emulator profile
 
 ## What remains
 
-The next work is the multi-game award worker: verify the complete library between games, save each result before advancing, handle interruptions and cancellation, and connect the final confirmation in the app. A complete multi-game test is required before a new package release. Registered digital and disc titles are within the goal; universal game compatibility has not been demonstrated.
+The next work is a native multi-game emulator sequence, followed by connecting the global review, final confirmation and deliberate game-to-game relaunches in the app. A complete multi-game test is required before a new package release. Registered digital and disc titles are within the goal; universal game compatibility has not been demonstrated.
 
 There is no reliable completion date yet. The goal remains **Unlock All across every game in one operation**, rather than requiring a separate operation for each game.
 
