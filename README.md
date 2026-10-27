@@ -5,12 +5,12 @@
 > **Artwork/build status (October 26, 2026):** The approved icon and background are embedded in the rebuilt development PKG. The installed app and artwork files now match the extracted package in console readback checks. Actual appearance is a separate visual check. Existing public releases are unchanged.
 
 ![Platform](https://img.shields.io/badge/Platform-PlayStation_3-blue)
-![Target](https://img.shields.io/badge/Target-Evilnat_4.91_CFW-orange)
+![Target](https://img.shields.io/badge/Target-Evilnat_4.93_CFW-orange)
 ![Status](https://img.shields.io/badge/Status-In_Development-yellow)
 
 # Saber PSN Unlock Tool
 
-A project by **Richard1222/Saber** to browse and unlock PlayStation 3 trophies. The development target is **Evilnat 4.91 CFW**; the current test console reports **4.93**.
+A project by **Richard1222/Saber** to browse and unlock PlayStation 3 trophies. The development target is **Evilnat 4.93 CFW**.
 
 > **Digital-game milestone (October 26, 2026):** An additional digital PS3 title completed **34/34 trophies**. Stable saved-file checks independently verified all 34 locally; the final app report records successful completion and clean cleanup. The owner subsequently confirmed that manual **PSN synchronization worked**. PSN success is owner-reported, not independently queried. This extends testing beyond Persona 5; compatibility with every game and real HEN hardware remains unverified. See the [digital test result](docs/DIGITAL-GAME-RESULT-2026-10-26.md).
 
@@ -84,7 +84,7 @@ Local saved results and PSN synchronization are separate checks. The existing ow
 
 ## Compatibility
 
-Development target: **Evilnat 4.91 CFW**. Current physical-console testing reports **4.93**; this does not establish 4.91 runtime compatibility. The separately labeled HEN package has build and disconnected emulator results; real HEN hardware compatibility remains unverified.
+Development target: **Evilnat 4.93 CFW**. Current console and emulator firmware metadata report **4.93**; full real-console validation of the new v0.0.51 build remains pending. The separately labeled HEN package has build and disconnected emulator results; real HEN hardware compatibility remains unverified.
 
 ## Credits
 
