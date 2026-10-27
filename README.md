@@ -1,12 +1,14 @@
+> **Unlock All development update (October 27, 2026):** The award stage passed a disconnected emulator test using an authored trophy set: three regular trophies plus automatic platinum, with existing earned progress preserved and saved results verified. **Unlocking across every game in one operation is still under development.** Current downloads remain [CFW/HEN v0.0.45](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). See [current progress and remaining work](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md).
+
 > **Artwork/build status (October 26, 2026):** The approved icon and background are embedded in the rebuilt development PKG. The installed app and artwork files now match the extracted package in console readback checks. Actual appearance is a separate visual check. Existing public releases are unchanged.
 
 ![Platform](https://img.shields.io/badge/Platform-PlayStation_3-blue)
-![Target](https://img.shields.io/badge/Target-Evilnat_4.93_CFW-orange)
+![Target](https://img.shields.io/badge/Target-Evilnat_4.91_CFW-orange)
 ![Status](https://img.shields.io/badge/Status-In_Development-yellow)
 
 # PS3 Trophy Unlocker 2026
 
-A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 trophies on Evilnat 4.93 CFW.
+A project by **Richard1222/Saber** to browse and unlock PlayStation 3 trophies. The development target is **Evilnat 4.91 CFW**; the current test console reports **4.93**.
 
 > **Digital-game milestone (October 26, 2026):** An additional digital PS3 title completed **34/34 trophies**. Stable saved-file checks independently verified all 34 locally; the final app report records successful completion and clean cleanup. The owner subsequently confirmed that manual **PSN synchronization worked**. PSN success is owner-reported, not independently queried. This extends testing beyond Persona 5; compatibility with every game and real HEN hardware remains unverified. See the [digital test result](docs/DIGITAL-GAME-RESULT-2026-10-26.md).
 
@@ -14,7 +16,7 @@ A project by **Richard1222/Saber** to browse and unlock selected PlayStation 3 t
 
 > **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). The earlier public preview was [v0.0.10](releases/v0.0.10/README.md); current CFW/HEN downloads are linked above.
 
-Updated October 26, 2026.
+Updated October 27, 2026.
 
 > **XMB-style UI progress (October 25, 2026):** The owner confirmed menu display/navigation on PS3, and the backup retest recorded verified completion. v0.0.37 adds **Check selection**: an earned trophy was rejected and a locked trophy produced a plan, with both paths recorded in the console report. That historical v0.0.37 selection-check build had unlocking disconnected; the current development build’s local batch result is described above. See the [selection-check preview](docs/UI-SELECTION-V037-2026-10-25.md).
 
@@ -28,7 +30,8 @@ Updated October 26, 2026.
 | --- | --- |
 | Browse trophy sets and individual trophies | Tested on one PS3 |
 | Menu-based selected unlock flow | Connected in the development UI; broader real-console validation pending |
-| Unlock all remaining trophies in one game | Persona 5 completed on one owner PS3: 48 new /49 total earned including platinum; saved files independently verified; full-batch PSN sync pending |
+| Unlock all remaining trophies in one game | Persona 5: 49/49 locally verified; full-batch PSN sync pending. Additional digital title: 34/34 locally verified and owner-confirmed manual PSN sync. |
+| Unlock trophies across every game in one operation | In development. Award stage and saved-result records passed authored emulator checks; multi-game orchestration and end-to-end validation remain pending. |
 | Create a complete-set backup | Console result and file-integrity checks passed |
 | Backup persistence | One owner-reported normal restart followed by successful integrity checks |
 | Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
@@ -45,6 +48,8 @@ Updated October 26, 2026.
 These are results for the tested console and trophy sets, not universal compatibility claims.
 
 ## Releases
+
+**Current CFW/HEN packages:** [Saber PSN Unlock Tool v0.0.45](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). No newer package is released by this development update.
 
 [v0.0.10 development progress](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.10-dev-preview-20261023) records an earlier public development milestone. This public release contains a progress report and public source snapshot, with no installable PKG attached.
 
@@ -66,18 +71,18 @@ All public milestones remain development previews. The measured single-trophy re
 
 ## Roadmap
 
-The current focus is validating the new console interface and completing per-game setup. Browsing, review and backup controls have earlier console results; the new selected-award integration now needs controller and real-console testing.
+The current goal is **one operation across every game in the profile**, including registered digital and disc titles. This is not finished yet.
 
-1. Extend the verified single-trophy result with identity, recovery and interruption checks.
-2. Test identity, recovery, interrupted operations and untouched trophies.
-3. Confirm local display and persistence on real hardware.
-4. Evaluate online-only trophies and PSN synchronization separately.
+1. Complete the multi-game award worker and verify the full library between games.
+2. Test cancellation, changed files and interrupted saves without repeating uncertain awards.
+3. Connect the final confirmation and validate the complete flow in the app.
+4. Validate separately on real CFW and HEN hardware before a new release.
 
-A local state change alone is not proof of PSN acceptance. This milestone includes the owner's explicit confirmation of synchronization and PSN visibility for one trophy.
+Local saved results and PSN synchronization are separate checks. The existing owner-confirmed PSN milestones remain limited to the tests described above.
 
 ## Compatibility
 
-Initial target: **PS3 running Evilnat 4.93 CFW**. HEN, other firmware variants and broad hardware compatibility are unverified.
+Development target: **Evilnat 4.91 CFW**. Current physical-console testing reports **4.93**; this does not establish 4.91 runtime compatibility. The separately labeled HEN package has build and disconnected emulator results; real HEN hardware compatibility remains unverified.
 
 ## Credits
 
