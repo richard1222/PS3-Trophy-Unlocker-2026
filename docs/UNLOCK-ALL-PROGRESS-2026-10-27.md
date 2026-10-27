@@ -1,6 +1,6 @@
 # Unlock All progress — October 27, 2026
 
-The award stage now passes a disconnected emulator test, including verification of saved results and preservation of previously earned trophies. **One operation across every game is still under development.** The current downloadable CFW/HEN release remains [v0.0.45](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45).
+The award stage now passes a disconnected emulator test, including verification of saved results and preservation of previously earned trophies. **One operation across every game is still under development.** The new CFW/HEN development prerelease is [Saber PSN Unlock Tool v0.0.51](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51).
 
 ## Verified in development
 
@@ -22,7 +22,7 @@ The fixture results do not establish support for every retail game, real HEN har
 
 ## Package candidates and app review
 
-Local **v0.0.51 CFW and HEN candidates** are built. Both passed actual final-package extraction, identity/artwork/notice checks and disconnected emulator startup with unchanged test trophy files and no trophy API calls. HEN has its own XMB title and storage ID. These candidates are **not published or installed**, and real HEN testing remains pending.
+**[v0.0.51 CFW and HEN test packages](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51) are published.** Both passed actual final-package extraction, identity/artwork/notice checks and disconnected emulator startup with unchanged test trophy files and no trophy API calls. HEN has its own XMB title and storage ID. Publication does not establish installation or real-console validation. Real HEN testing remains pending.
 
 The actual app displayed a freshly verified review for two prepared games and eight remaining trophies without awarding anything. This is an exported software frame from an authored smoke test. The controller-connected label was simulated for the illustration; physical input and GPU appearance are not proved.
 
@@ -40,4 +40,4 @@ There is no reliable completion date yet. The goal remains **Unlock All across e
 
 The development target is **Evilnat 4.91 CFW**. Current console/emulator metadata reports **4.93**; 4.91 runtime compatibility remains unverified. HEN has a separately named test package and disconnected emulator checks, with real HEN testing pending.
 
-[Download the existing CFW and HEN v0.0.45 packages](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). This progress update does not publish a new package or change release assets.
+[Download Saber PSN Unlock Tool v0.0.51 CFW/HEN test packages](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). The prior v0.0.45 release and its separate real-console milestones remain available.

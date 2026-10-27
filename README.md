@@ -1,6 +1,6 @@
-> **App/package update (October 27, 2026):** Global confirmation and game-to-game launch controls are connected in development source. Local v0.0.51 CFW/HEN package candidates passed extraction and disconnected emulator startup checks. The verified review screen is shown in [current progress](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md). **Full controller-flow and hardware validation remain pending; the public download is still v0.0.45.**
+> **New test release:** [Saber PSN Unlock Tool v0.0.51 — CFW + HEN](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). Includes the connected all-games review and controlled award flow, separately labeled CFW/HEN packages, instructions and checksums. **Full controller-flow and real-hardware validation remain pending.**
 
-> **Unlock All development update (October 27, 2026):** The award stage passed a disconnected emulator test across **two authored trophy sets in four guest launches**: three regular trophies plus automatic platinum per game, with existing earned progress preserved and saved results verified. **Unlocking across every game in one operation is still under development.** Current downloads remain [CFW/HEN v0.0.45](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). See [current progress and remaining work](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md).
+> **Unlock All development update (October 27, 2026):** The award stage passed a disconnected emulator test across **two authored trophy sets in four guest launches**: three regular trophies plus automatic platinum per game, with existing earned progress preserved and saved results verified. **Unlocking across every game in one operation is still under development.** Current test downloads: [CFW/HEN v0.0.51](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). See [current progress and remaining work](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md).
 
 > **Artwork/build status (October 26, 2026):** The approved icon and background are embedded in the rebuilt development PKG. The installed app and artwork files now match the extracted package in console readback checks. Actual appearance is a separate visual check. Existing public releases are unchanged.
 
@@ -8,7 +8,7 @@
 ![Target](https://img.shields.io/badge/Target-Evilnat_4.91_CFW-orange)
 ![Status](https://img.shields.io/badge/Status-In_Development-yellow)
 
-# PS3 Trophy Unlocker 2026
+# Saber PSN Unlock Tool
 
 A project by **Richard1222/Saber** to browse and unlock PlayStation 3 trophies. The development target is **Evilnat 4.91 CFW**; the current test console reports **4.93**.
 
@@ -51,7 +51,7 @@ These are results for the tested console and trophy sets, not universal compatib
 
 ## Releases
 
-**Current CFW/HEN packages:** [Saber PSN Unlock Tool v0.0.45](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). No newer package is released by this development update.
+**Current CFW/HEN test packages:** [Saber PSN Unlock Tool v0.0.51](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). This is a development prerelease. The earlier v0.0.45 release remains available.
 
 [v0.0.10 development progress](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.10-dev-preview-20261023) records an earlier public development milestone. This public release contains a progress report and public source snapshot, with no installable PKG attached.
 
