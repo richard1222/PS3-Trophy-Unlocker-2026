@@ -1,11 +1,3 @@
-> **Known issue under investigation (October 27, 2026):** The owner reported a freeze in v0.0.51 after using Square with Persona 5 selected. The retrieved session report ends on a per-game Review screen, before any recorded batch start. The cause is not confirmed. Avoid repeating that flow until diagnostic testing is complete; preserve installed app data and reports. Emulator success does not establish a real-console fix. See the [current investigation](docs/V051-SQUARE-FREEZE-2026-10-27.md).
-
-> **New test release:** [Saber PSN Unlock Tool v0.0.51 — CFW + HEN](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). Includes the connected all-games review and controlled award flow, separately labeled CFW/HEN packages, instructions and checksums. **Full controller-flow and real-hardware validation remain pending.**
-
-> **Unlock All development update (October 27, 2026):** The award stage passed a disconnected emulator test across **two authored trophy sets in four guest launches**: three regular trophies plus automatic platinum per game, with existing earned progress preserved and saved results verified. **Unlocking across every game in one operation is still under development.** Current test downloads: [CFW/HEN v0.0.51](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). See [current progress and remaining work](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md).
-
-> **Artwork/build status (October 26, 2026):** The approved icon and background are embedded in the rebuilt development PKG. The installed app and artwork files now match the extracted package in console readback checks. Actual appearance is a separate visual check. Existing public releases are unchanged.
-
 ![Platform](https://img.shields.io/badge/Platform-PlayStation_3-blue)
 ![Target](https://img.shields.io/badge/Target-Evilnat_4.93_CFW-orange)
 ![Status](https://img.shields.io/badge/Status-In_Development-yellow)
@@ -14,89 +6,64 @@
 
 A project by **Richard1222/Saber** to browse and unlock PlayStation 3 trophies. The development target is **Evilnat 4.93 CFW**.
 
-> **Digital-game milestone (October 26, 2026):** An additional digital PS3 title completed **34/34 trophies**. Stable saved-file checks independently verified all 34 locally; the final app report records successful completion and clean cleanup. The owner subsequently confirmed that manual **PSN synchronization worked**. PSN success is owner-reported, not independently queried. This extends testing beyond Persona 5; compatibility with every game and real HEN hardware remains unverified. See the [digital test result](docs/DIGITAL-GAME-RESULT-2026-10-26.md).
+## Current development — October 29, 2026
 
-> **Local Unlock All milestone (October 26, 2026):** The v0.0.45 development UI completed Persona 5’s remaining 48 trophies on the owner’s PS3, including automatic platinum. Independent, identical repeat reads of the saved files confirm **49/49 earned**, unchanged trophy metadata and preservation of the previously earned trophy. The final console report records successful completion and clean cleanup. **PSN synchronization of this full batch is not yet tested.** See the [local bulk verification](docs/PERSONA5-LOCAL-BULK-2026-10-26.md). A separately labeled HEN test package has passed package and disconnected emulator-startup checks; real HEN compatibility remains unverified. **CFW and HEN test packages:** [Saber PSN Unlock Tool v0.0.45 release](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.45). XMB titles are **Saber PSN Unlock Tool** and **Saber PSN Unlock Tool HEN**. Game-specific setup is required; the packages do not include it.
+**Local development build: v0.0.58.** The CFW build is installed on the test console. Separately labeled CFW and HEN packages passed package inspection and disconnected RPCS3 4.93 startup checks. **Real HEN hardware and a complete multi-game award run remain unverified.**
 
-> **Verified award milestone (October 25, 2026):** The owner confirmed successful synchronization and PSN visibility for Persona 5’s “Merciless Executioner,” following the independently verified local award and restart persistence. An earlier `80022D1E` sync failure is retained in the evidence; its exact cause is unconfirmed. See the [owner-confirmed PSN milestone](docs/OWNER-CONFIRMED-PSN-2026-10-25.md). The earlier public preview was [v0.0.10](releases/v0.0.10/README.md); current CFW/HEN downloads are linked above.
+The owner tested the new **registered games only** review. It explicitly lists uninitialized installed digital titles before the owner chooses to exclude them. That choice does not unlock trophies: matching game setup and a later award confirmation are still required.
 
-Updated October 27, 2026.
-
-> **XMB-style UI progress (October 25, 2026):** The owner confirmed menu display/navigation on PS3, and the backup retest recorded verified completion. v0.0.37 adds **Check selection**: an earned trophy was rejected and a locked trophy produced a plan, with both paths recorded in the console report. That historical v0.0.37 selection-check build had unlocking disconnected; the current development build’s local batch result is described above. See the [selection-check preview](docs/UI-SELECTION-V037-2026-10-25.md).
-
-![Trophy list UI preview using authored example data](docs/assets/ui-v036/trophies.png)
-
-> **Earlier October 25 milestone:** First-status cancellation passed on the owner's PS3 with unchanged trophy files. The later completed-registration result above has different preservation findings. See the [historical cancellation result](docs/HARDWARE-CANCELLATION-2026-10-25.md).
-
-## Current progress
-
-| Feature | Evidence |
+| Current result | Evidence and limit |
 | --- | --- |
-| Browse trophy sets and individual trophies | Tested on one PS3 |
-| Menu-based selected unlock flow | Connected in the development UI; broader real-console validation pending |
-| Unlock all remaining trophies in one game | Persona 5: 49/49 locally verified; full-batch PSN sync pending. Additional digital title: 34/34 locally verified and owner-confirmed manual PSN sync. |
-| Unlock trophies across every game in one operation | App controls connected in development source. Two-game native sequence and fresh review screen passed in the emulator; full controller/hardware validation pending. |
-| Create a complete-set backup | Console result and file-integrity checks passed |
-| Backup persistence | One owner-reported normal restart followed by successful integrity checks |
-| Recover into a new scratch folder | Console result confirmed; 83 copied files / 3,672,696 bytes passed separate integrity checks |
-| Compare that scratch copy against backup and live originals | Follow-up interrupted by FTP timeouts; pending |
-| App-owned read-only context setup/cleanup | v0.0.22 hardware diagnostic passed on one PS3 (18 report fields) |
-| App-owned writable context setup/cleanup | v0.0.27 hardware report, installed payload and four-file comparison passed |
-| Guarded native trophy-state query | v0.0.25 two-cycle hardware report, installed payload and independent four-file comparison passed |
-| Registered-context trophy queries | Native selected-trophy details and 49-trophy flags passed; three-file preservation failure retained |
-| Unlock a selected trophy | One native Persona 5 award verified by API readbacks and independent saved-file parsing |
-| Unlock persistence | Local award retained after an owner-confirmed normal restart; all 57 files match post-error backup |
-| Restore to a live trophy folder | Not implemented or tested |
-| PSN synchronization | Owner confirmed successful sync and PSN visibility for one Persona 5 trophy after an earlier error |
+| Installed digital-game discovery | Tested on the owner's CFW PS3; PS1/PS2 Classics are excluded from the PS3 digital scan |
+| Registered-game selection | Console report records 38 registered trophy sets and three explicitly excluded uninitialized digital sets |
+| Remaining setup work | Initial check found 26 missing setups; two additional candidates have since been staged, leaving 24 without a staged candidate. A fresh complete-library check is still pending |
+| Transformers: Fall of Cybertron | Matching setup accepted by native registration; owner cancelled the fresh review; independent comparison remains 0/51 with earned flags and trophy rows unchanged |
+| The Simpsons Arcade Game | Matching setup passed offline checks and was staged; native registration and awards have not been tested for this candidate |
+| Local automated validation | 73 test methods passed for the v0.0.58 development build; not a claim of GitHub CI validation |
+| Every registered game in one award operation | **Not yet hardware-validated** |
 
-These are results for the tested console and trophy sets, not universal compatibility claims.
+Development is **paused at the owner's request**. This update changes documentation only: **no new PKG/ZIP uploads, release assets, tags or releases**.
 
-## Releases
+[October 29 progress and remaining work](docs/PROGRESS-2026-10-29.md)
 
-**Current CFW/HEN test packages:** [Saber PSN Unlock Tool v0.0.51](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51). This is a development prerelease. The earlier v0.0.45 release remains available.
+## Verified per-game milestones
 
-[v0.0.10 development progress](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.10-dev-preview-20261023) records an earlier public development milestone. This public release contains a progress report and public source snapshot, with no installable PKG attached.
+- **Call of Duty Classic:** 38/38 saved trophies independently verified on v0.0.54; the owner confirmed manual PSN synchronization, 100% and platinum.
+- **Resident Evil 6:** 71/71 locally verified; the owner confirmed manual PSN synchronization.
+- **Persona 5:** 49/49 locally verified. The earlier owner-confirmed PSN milestone for “Merciless Executioner” is documented separately.
+- **Eiyuu Senki:** 34/34 locally verified; the owner confirmed manual PSN synchronization.
 
-Earlier development notes remain in [releases/](releases/). They describe their own point in development and may predate newer results.
+Owner-reported PSN outcomes are separate from local file verification. They do not establish universal PSN compatibility or new-build validation.
 
-## Development milestone (October 25, 2026)
+## UI
 
-- **Proven:** v0.0.27 created and cleaned up a writable-capable context and handle on one PS3, with no retained resources. Installed payload and independent four-file comparisons passed.
-- **Proven:** v0.0.25 previously completed two read-only query/cleanup cycles, each returning49 trophies. The selected trophy remains locked in the unchanged record.
-- **Proven:** registered-context queries identified the selected trophy and returned 49 locked trophies on the owner's PS3. Cleanup succeeded; three of 57 collected files changed.
-- **Inference:** the query result supports a bounded single-trophy hardware test; it does not prove unlocking or data integrity.
-- **Proven:** exactly one selected trophy unlocked, its timestamps were saved, and the other 48 decoded trophy records were unchanged in two complete collections. Cleanup and XMB return passed.
-- **Proven:** the local award survived an owner-confirmed normal restart. Persona 5 loads normally while signed out.
-- **Owner-confirmed:** successful synchronization and PSN visibility for the selected Persona 5 trophy. No independent PSN profile readback was captured.
-- **Unknown:** exact sync-error cause, independent protection-file integrity, general callback lifetime, broader PSN compatibility and HEN runtime compatibility.
-- **Next:** retain the successful result and earlier failure, then plan a separate bounded validation case. The completed award test remains disabled.
+![Historical trophy-list illustration using authored example data](docs/assets/ui-v036/trophies.png)
 
-All public milestones remain development previews. The measured single-trophy result is not a general compatibility claim or a new end-user release.
+This is an existing **historical authored UI illustration**, not a screenshot of the current exclusions review.
 
-## Roadmap
+## Releases and compatibility
 
-The current goal is **one operation across every game in the profile**, including registered digital and disc titles. This is not finished yet.
+Existing downloads remain on the [releases page](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases). The previously published [v0.0.51 test release](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.51) is a historical development build; **it does not contain the local v0.0.58 changes**.
 
-1. Validate controller input and the final dialog around the connected all-games flow.
-2. Test cancellation, changed files and interrupted saves without repeating uncertain awards.
-3. Finish installed-app preservation and validate the complete flow on a bounded console test.
-4. Validate separately on real CFW and HEN hardware before a new release.
+The earlier v0.0.51 freeze report remains preserved in the [investigation](docs/V051-SQUARE-FREEZE-2026-10-27.md). Later successful tests apply to their specific tested flows; they do not prove every freeze cause is resolved.
 
-Local saved results and PSN synchronization are separate checks. The existing owner-confirmed PSN milestones remain limited to the tests described above.
+Target: **Evilnat 4.93 CFW**. The HEN test package has its own XMB label and storage. Its real-hardware compatibility remains pending. Game-specific setup is required and is not included in public packages.
 
-## Compatibility
+## Next development steps
 
-Development target: **Evilnat 4.93 CFW**. Current console and emulator firmware metadata report **4.93**; full real-console validation of the new v0.0.51 build remains pending. The separately labeled HEN package has build and disconnected emulator results; real HEN hardware compatibility remains unverified.
+1. Validate the staged Simpsons setup without awarding trophies.
+2. Collect and verify matching setup for the remaining registered games.
+3. Validate complete-library preparation, cancellation and recovery before a full award test.
+4. Test separately on real HEN hardware before claiming HEN compatibility.
 
-## Credits
+Local saved results and manual PSN synchronization remain separate checks.
 
-Project creator: **Richard1222/Saber**.
+## Earlier evidence
 
-Research builds on publicly available PlayStation homebrew documentation and developer-maintained source. Existing contributor credits and licenses in the public source remain applicable.
+[Persona 5 local batch](docs/PERSONA5-LOCAL-BULK-2026-10-26.md) · [Digital-game result](docs/DIGITAL-GAME-RESULT-2026-10-26.md) · [Owner-confirmed selected-trophy PSN result](docs/OWNER-CONFIRMED-PSN-2026-10-25.md) · [Earlier all-games progress](docs/UNLOCK-ALL-PROGRESS-2026-10-27.md)
 
-## License
+## Credits and license
 
-Original project code is licensed under the [MIT License](LICENSE), copyright
-2026 Richard (Richard1222/Saber). Third-party components retain their own
-terms; see [Third-party notices](THIRD_PARTY_NOTICES.md) and the full notices
-in [licenses/](licenses/).
+Project creator: **Richard1222/Saber**. Existing contributor credits and third-party licenses remain applicable.
+
+Original project code is licensed under the [MIT License](LICENSE), copyright 2026 Richard (Richard1222/Saber). See [Third-party notices](THIRD_PARTY_NOTICES.md) and [licenses/](licenses/).
