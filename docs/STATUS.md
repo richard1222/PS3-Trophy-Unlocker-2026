@@ -1,3 +1,21 @@
+# Latest hardware finding — November 6, 2026
+
+**Known v0.0.62 issue: whole-library preparation returned to XMB before its first worker started.** Keep the saved job and backups; do not repeat preparation or confirm awards pending the fix.
+
+**Proven:** v0.0.62 CFW is installed, with all seven package files independently verified and 47 prior reports preserved. The physical exclusion flow passed: 25 registered sets, exactly four unavailable games reviewed and excluded, 21 included games, 1,024 remaining trophies, 17 matching setups checked, and no included setup gaps. Fifteen uninitialized digital sets were reviewed separately.
+
+The user then chose preparation. Its first worker was queued, but no successor app report appeared. Saved-job decoding confirms no worker claim, no completed preparation, and no award confirmation. Preparation and award result stores are empty.
+
+**Inference:** The failure occurs during the transition to the next process. Its exact cause is still being tested.
+
+**Unknown / next:** A completed whole-library preparation/award run remains unverified. A separate read-only handoff diagnostic passed the disconnected emulator check and is installed for the next hardware test; that test cannot award trophies. HEN hardware remains untested.
+
+The public v0.0.62 release is now marked **Latest**, rather than prerelease. Package assets and SHA-256 values are unchanged.
+
+---
+
+## Earlier release snapshot — superseded where stated above
+
 # Current status — November 6, 2026
 
 **v0.0.62 is the artwork and reviewed-selection test release for Evilnat 4.93 CFW, with a separate HEN package.** [Release and checksums](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.62).

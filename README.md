@@ -27,16 +27,18 @@ Selected-game unlocking and owner-operated PSN sync have succeeded on hardware. 
 
 **v0.0.62 test release · November 6, 2026.** [Download CFW or HEN packages](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.62) · [Detailed status](docs/STATUS.md)
 
+**Known v0.0.62 issue:** Whole-library readiness passed on hardware, but confirming preparation returned to XMB before its first worker started. Whole-library preparation and awards are blocked pending a handoff fix; do not repeat that attempt. No awards occurred in this test.
+
 This build includes the approved Saber/Artoria trophy icon and corrected “Saber PSN Unlock Tool” XMB background. It retains v0.0.61's reviewed skip list: when matching setup is genuinely absent, you can review every affected game and explicitly exclude those games from a job. Damaged or partial setups remain blocking errors.
 
 | Current evidence | Result / limit |
 | --- | --- |
-| Physical installation | v0.0.61 CFW independently verified; v0.0.62 hardware test pending |
-| Latest complete hardware library check | 25 registered sets; 1,268 remaining; 5 missing setups at that time |
+| Physical installation | v0.0.62 CFW independently verified installed; 47 prior reports preserved |
+| Latest complete hardware readiness check | 25 registered; 21 included; 1,024 remaining; no included setup gaps |
 | Subsequent World at War test | Matching setup accepted; preparation cancelled with 0/65 unchanged |
-| Remaining setup gaps | 4 projected after that test; a fresh whole-library check is still needed |
+| Reviewed registered-game exclusions | Exactly four unavailable games; 244 locked trophies excluded |
 | Uninitialized installed digital sets | 15 explicitly excluded in the historical check; separate from missing-setup exclusions |
-| Whole-library awards | Not yet validated |
+| Whole-library preparation / awards | First process handoff failed before any worker claim; no awards |
 
 The historical full-selection count is not the remaining count for a new selection with exclusions. Excluded games receive no awards in that job. A readiness check, preparation and the final award confirmation are separate steps; PSN synchronization remains manual.
 
@@ -58,7 +60,7 @@ The historical full-selection count is not the remaining count for a new selecti
 2. Choose the package labeled **CFW** or **HEN** for your environment and compare its SHA-256 with the release checksum file.
 3. Open Saber and browse the game and trophy lists.
 4. Press **Square from Games** for All Games. Review any digital exclusions and missing-setup exclusions separately.
-5. Let the check finish. For the next validation test, stop at its result without preparing or confirming awards.
+5. Let the check finish. Stop at its result. Whole-library preparation currently has a known handoff failure; do not confirm it again until a fix is validated.
 
 Use **Circle** to go back and **Start** to exit. Keep backups and existing reports when updating an installed test build.
 
@@ -74,13 +76,13 @@ Use **Circle** to go back and **Start** to exit. Keep backups and existing repor
 
 | Workstream | State | Evidence / limit |
 | --- | --- | --- |
-| Browsing and controller navigation | Hardware-tested in earlier CFW builds | New skip-list flow needs a physical test |
+| Browsing and controller navigation | Hardware-tested in earlier CFW builds | Four-game skip-list review and readiness passed on hardware |
 | Individual / per-game trophy workflows | Selected-game results | Includes owner-confirmed PSN sync; title-specific |
-| Missing-setup skip list | Local regression checks pass | Explicit review, persisted selection and worker rechecks; hardware flow pending |
+| Missing-setup skip list | Local regression checks pass | Hardware review excluded exactly four unavailable games; no included setup gaps |
 | World at War preparation | Hardware passed | Cancelled before awards; 0/65 preserved |
 | Super Heroine Chronicle | Single award verified | 13 prior trophies preserved, 14/40 saved; owner confirmed sync |
 | Whole-library award completion | Not validated | Preparation and readiness are not a completed award run |
-| v0.0.62 CFW / HEN packages | Inspection and emulator startup pass | No v0.0.62 physical result; real HEN untested |
+| v0.0.62 CFW / HEN packages | Inspection and emulator startup pass | CFW installation and readiness passed; preparation handoff failed; real HEN untested |
 
 ## Validation
 
