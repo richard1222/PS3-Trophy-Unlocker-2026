@@ -1,43 +1,34 @@
 # Current status — November 6, 2026
 
-**Saber PSN Unlock Tool v0.0.59 CFW is installed and its read-only library check passes on the test PS3.** Matching setup is still missing for six registered games, so whole-library preparation remains blocked.
+**v0.0.62 is the artwork and reviewed-selection test release for Evilnat 4.93 CFW, with a separate HEN package.** [Release and checksums](https://github.com/richard1222/PS3-Trophy-Unlocker-2026/releases/tag/v0.0.62).
+
+In plain language: selected-game awards work in tested cases. The new optional skip list lets a job leave out games whose matching setup is absent, after explicit review. It does not establish that a whole-library award run is complete or that every game is compatible.
 
 ## Proven
 
-- Development target: Evilnat 4.93 CFW. Package app version: 01.59.
-- The installed payload was independently read back and matched the validated candidate. All 38 prior startup reports were unchanged; setup and app-state directory names were preserved. This was not a fresh byte-for-byte archive of every setup and checkpoint.
-- The owner completed navigation, exclusion review and registered-games-only preflight in v0.0.59.
-- The latest report records 25 registered sets, 1,269 remaining trophies, 15 checked matching setups for unfinished sets and six missing setups.
-- Fifteen uninitialized installed digital sets were explicitly excluded. No preparation, award or PSN sync was started by that check.
-- Missing setup titles: GTA IV, LittleBigPlanet, Call of Duty: World at War, Yakuza: Dead Souls, Grand Theft Auto V and Super Heroine Chronicle.
-- 75 unique local methods passed. The six-method scope rerun is included in the library group and is not counted twice.
-- Both normal CFW/HEN package payloads reached startup/discovery in disconnected RPCS3 4.93 with authored trophy fixtures unchanged and zero trophy API calls.
-- Earlier owner-confirmed PSN results remain selected-game observations. See the [historical owner-confirmed result](OWNER-CONFIRMED-PSN-2026-10-25.md).
+- v0.0.61 CFW was installed and independently read back: all seven packaged files matched, all 47 prior reports were unchanged, and app-state/setup directory names were preserved. This was not a fresh byte-for-byte backup of every checkpoint and setup.
+- 85 unique application test methods passed without skips. The final native input-guard audit passed address- and undefined-behavior sanitizer checks.
+- v0.0.62 changes version markers and the approved XMB artwork while retaining that audited application logic.
+- Both v0.0.62 packages passed payload, executable/import, identity, 4.93 metadata, artwork and notice checks. Their actual extracted payloads reached UI startup/discovery in disconnected RPCS3 4.93, with unchanged authored fixtures and no trophy API calls. The host stopped each UI after 20 seconds.
+- Super Heroine Chronicle's single-trophy result was independently verified at 14/40 with all 13 previous earned records preserved; the owner confirmed PSN sync.
+- World at War's preparation/cancel test reached a fresh confirmation with 0/65 unchanged and no award. Its earlier registration failure remains historical evidence.
+- The latest complete hardware library check predates that World at War success: 25 registered sets, 1,268 remaining, five missing matching setups, and 15 separately reviewed uninitialized digital exclusions.
 
-## What changed in v0.0.59
+## Inference
 
-Whole-library preparation already compared canonical records before and after native registration. The same comparison now runs for direct, individual-review and per-game batch sessions before a new review or award.
+World at War's accepted setup reduces the projected missing-setup count from five to four. This is not a new whole-library measurement. The four unavailable sources are GTA IV, LittleBigPlanet, Yakuza: Dead Souls and GTA V. A reduced selection must list and explicitly exclude them; its remaining-trophy total must be measured afresh.
 
-Changed definitions, flags or timestamps stop the session. Raw container rewrites may still be accepted when the records themselves are unchanged. A failed or ambiguous action is not retried automatically.
+## Unknown / next test
 
-Five adversarial test scenarios cover registration clearing an earned trophy in direct, individual-review, preparation and per-game batch flows, plus changing an already-earned timestamp. They verify zero review/award activity and clean teardown.
+The v0.0.62 physical UI, the new skip-list controller flow, a completed whole-library award run and real HEN operation remain unverified. No automatic PSN synchronization is included.
 
-## Inference and unknown
+Next: while signed out of PSN, review the missing-setup exclusions and run only the registered-games readiness check. Stop at its result before preparation or awards. Confirm included/excluded counts and preservation of saved state before progressing.
 
-Two normal game launches were observed with temporary local earned-count changes. Owner-controlled normal PSN synchronization restored their earlier earned records, and those records were independently rechecked. The cause of those initialization changes has not been established.
+## Evidence and release files
 
-The new app guard detects registration changes and stops subsequent app actions. It does not prevent external game writes or provide an automatic repair. Its failure behavior has local authored coverage; it has not been deliberately triggered on real hardware.
+| Package | SHA-256 |
+| --- | --- |
+| CFW | c3dfe68c25b6e2a296905dbf39095cc448e6429b56076401536095c4c85313a4 |
+| HEN | 46e8c573ea58a4b5688e2227f41d267fc72d66253e9ed50dd274eb0897a87ce1 |
 
-The HEN candidate is separately labeled and uses a separate app identity. Real HEN hardware, complete whole-library awards and universal game compatibility remain unverified.
-
-The emulator UI was stopped by the host after 20 seconds. That check does not establish controller input, clean guest exit, native registration, trophy awards or PSN behavior.
-
-## Next
-
-Complete the six missing matching setups, investigate registration stability, and retain separate native-preparation and final-award reviews. Whole-library completion must be established through actual saved-state evidence, not inferred from a readiness screen.
-
-The current candidate remains local. This documentation update adds no release, tag, image, package, ZIP or raw console files. The public branch's historical build workflows are not exact-commit proof of the local v0.0.59 candidate.
-
-## Evidence scope
-
-The current status summarizes local candidate receipts and the owner-completed hardware report. No new hardware screenshot was captured for this check. The README retains an existing v0.0.36 UI image, clearly labeled historical. Earlier pages, including [October 29 progress](PROGRESS-2026-10-29.md), describe their original dates and are superseded by this status.
+Each package is 3,560,336 bytes. App version is 01.62; CFW title ID is TROPH2026, HEN title ID is TROPHHEN1. These locally built binaries are distinct from a public-branch CI build. Historical [UI screenshot](assets/ui-v036/trophies.png) is v0.0.36, not a current hardware capture.
